@@ -1,6 +1,6 @@
 /** @type {import('next-i18next').UserConfig} */
 module.exports = {
-    debug: true,
+    debug: process.env["MODE"] === "debug",
     lng: "ru",
     nsSeparator: ".",
     keySeparator: ":",
