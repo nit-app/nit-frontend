@@ -4,7 +4,7 @@ import Head from "next/head";
 import { QueryClient } from "@tanstack/query-core";
 
 import { DefaultTags } from "@/shared/seo";
-import { appWithTranslation, useTranslation } from "@/shared/translation";
+import { appWithTranslation, key, Namespace, useTranslation } from "@/shared/translation";
 
 import "@/shared/styles/globals.css";
 import { AppProps } from "./_app.types";
@@ -18,7 +18,7 @@ function App({ Component, ...props }: NextAppProps<AppProps>) {
     const { pageProps } = props;
     const { t } = useTranslation();
     const meta = pageProps.meta?.tags || [];
-    const title = pageProps.meta?.title || t("INDEX_SERVICE_TITLE");
+    const title = pageProps.meta?.title || t(key(Namespace.service, "title"));
 
     return (
         <>

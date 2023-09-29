@@ -1,3 +1,3 @@
-export {DefaultTags} from "./defaultTags";
+export { DefaultTags } from "./defaultTags";
 
-export type {Meta} from "./meta.types";
+export type { Meta } from "./types";
