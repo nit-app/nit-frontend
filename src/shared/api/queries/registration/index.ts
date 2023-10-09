@@ -1,0 +1,1 @@
+export {postRegistration} from "./registration.post"

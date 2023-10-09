@@ -1,0 +1,1 @@
+export {usePostRegistration} from "./useRegistration.post"
