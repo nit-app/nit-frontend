@@ -9,10 +9,10 @@ import { appWithTranslation, key, Namespace, useTranslation } from "@/shared/tra
 import "@/shared/styles/globals.css";
 
 import { AppProps } from "./_app.types";
-
+import { startMirage } from "@/other/mirage/config";
 
 const queryClient = new QueryClient();
-
+startMirage();
 
 function App({ Component, ...props }: NextAppProps<AppProps>) {
     const { pageProps } = props;
@@ -25,7 +25,6 @@ function App({ Component, ...props }: NextAppProps<AppProps>) {
                 <meta charSet="utf-8"/>
                 {...DefaultTags}
                 {meta && meta.map(prop => <meta {...prop} key={prop.key}/>)}
-                {process.env["MODE"] === "debug" && <script async id="scriptAfterInteractive" src="/installMock.js"/>}
                 <title key="title">{title}</title>
             </Head>
 

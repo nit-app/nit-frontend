@@ -1,22 +1,22 @@
 import { useTranslation, key, Namespace } from "@/shared/translation";
-import { useGetAllHello } from "@/shared/api/hooks";
+import { useGetAllEvents } from "@/shared/api/hooks";
 import { List, Typography } from "antd";
-
+import { Event } from "@/other/mirage/types";
 
 const { Text, Title } = Typography;
 
 export function Index() {
     const { t } = useTranslation();
-    const { allHello, allHelloLoading, allHelloError } = useGetAllHello();
-    const allHelloLoaded = !allHelloLoading && !allHelloError;
+    const { allEvents, allEventsLoading, allEventsError } = useGetAllEvents();
+    const allHelloLoaded = !allEventsLoading && !allEventsError;
     return (
         <>
             <main>
-                <Title>{t(key(Namespace.content, "hello"), ".")}</Title>
-                <List loading={allHelloLoading}>
+                <Title>{t(key(Namespace.content, "event"), ".")}</Title>
+                <List loading={allEventsLoading}>
                     {
-                        allHelloLoaded && allHello.map((hello) => (
-                                <List.Item key={hello}><Text>{hello}</Text></List.Item>
+                        allHelloLoaded && allEvents.map((event: Event) => (
+                                <List.Item key={event.id}><Text>{event.title}</Text></List.Item>
                             )
                         )
                     }
@@ -25,5 +25,3 @@ export function Index() {
         </>
     );
 }
-
-
