@@ -1,0 +1,1 @@
+export {FinishRegistrationComponent as FinishRegistration} from "./finishRegistration.component";
