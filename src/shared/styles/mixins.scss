@@ -1,0 +1,14 @@
+%absolute-to-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin display-flex($direction:column, $justify-content:center, $align-items:center, $gap: 16px){
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify-content;
+  align-items: $align-items;
+  gap: $gap;
+}
