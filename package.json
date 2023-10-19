@@ -21,10 +21,10 @@
     "next-i18next": "^14.0.3",
     "react": "latest",
     "react-dom": "latest",
-    "react-i18next": "^13.2.2",
-    "typescript-plugin-css-modules": "^5.0.2"
+    "react-i18next": "^13.2.2"
   },
   "devDependencies": {
+    "typescript-plugin-css-modules": "^5.0.2",
     "@faker-js/faker": "^8.1.0",
     "@types/node": "latest",
     "@types/react": "latest",
