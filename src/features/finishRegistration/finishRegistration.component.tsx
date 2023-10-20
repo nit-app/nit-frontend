@@ -14,10 +14,9 @@ export const FinishRegistrationComponent = () => {
     return (
         <div className={styles.container}>
             <Logo/>
-            <Title style={{ margin: 0 }} level={3}>Введите свои данные</Title>
+            <Title className={styles.title} level={3}>Введите свои данные</Title>
             <Form
                 onFinish={onFinish}
-                style={{ width: "100%" }}
                 colon={false}
             >
                 <Form.Item
@@ -77,7 +76,7 @@ export const FinishRegistrationComponent = () => {
                     <Input.Password minLength={8} placeholder="Повторите пароль"/>
                 </Form.Item>
                 <Form.Item>
-                    <Button style={{ width: "100%" }} type="primary" htmlType="submit">
+                    <Button className={styles.submit} type="primary" htmlType="submit">
                         Создать аккаунт
                     </Button>
                 </Form.Item>
