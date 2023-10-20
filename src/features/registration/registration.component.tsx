@@ -25,12 +25,11 @@ export const RegistrationComponent: React.FC = () => {
             </div>
             <Text>Мы отправим код подтверждения</Text>
             <Form
-                style={{ width: "100%" }}
                 name="loginForm"
                 autoComplete="true"
                 onFinish={onFinishHandler}
             >
-                <Form.Item style={{ marginBottom: 16 }}>
+                <Form.Item className={styles["ant-form-item"]}>
                     <Input
                         allowClear={{ clearIcon: <CloseOutlined onClick={() => setValue("")}/> }}
                         value={value}
@@ -43,7 +42,7 @@ export const RegistrationComponent: React.FC = () => {
                     />
                 </Form.Item>
                 <Form.Item>
-                    <Button style={{ width: "100%" }} type="primary" htmlType="submit">
+                    <Button className={styles.submit} type="primary" htmlType="submit">
                         Далее
                     </Button>
                 </Form.Item>
