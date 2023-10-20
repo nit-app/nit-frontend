@@ -3,7 +3,6 @@ import { Timer } from "@/shared/ui/timer";
 import { Logo } from "@/shared/elements/logo";
 import { Form, Input, Typography } from "antd";
 import styles from "./style.module.scss";
-import { useMask } from "@/shared/hooks";
 import { CloseOutlined } from "@ant-design/icons";
 import { useRouter } from "next/router";
 import { EnterCodeComponentProps } from "./types";
@@ -11,11 +10,8 @@ import { EnterCodeComponentProps } from "./types";
 const { Text, Link, Title } = Typography;
 export const EnterCodeComponent = ({ link, phone }: EnterCodeComponentProps) => {
     const router = useRouter();
+    const [value, setValue] = useState("");
     const [timeStop, setTimeStop] = useState(false);
-    const { value, keydown, format, blur, setValue } = useMask({
-        pattern: "0000",
-        skipSymbol: "0",
-    });
     useEffect(() => {
         if (value.length === 4) {
             router.push(link);
@@ -36,18 +32,16 @@ export const EnterCodeComponent = ({ link, phone }: EnterCodeComponentProps) => 
                     на номер {phone}</Text>
             </div>
             <Form
-                style={{ width: "100%" }}
                 name="enterCodeForm"
                 autoComplete="false"
             >
-                <Form.Item style={{ margin: 0 }}>
-                    <Input placeholder="****"
-                           allowClear={{ clearIcon: <CloseOutlined onClick={() => setValue("")}/> }}
+                <Form.Item>
+                    <Input placeholder="••••"
+                           minLength={4}
+                           maxLength={4}
+                           onChange={(e) => setValue(e.target.value)}
                            value={value}
-                           onInput={format}
-                           onFocus={format}
-                           onKeyDown={keydown}
-                           onBlur={blur}
+                           allowClear={{ clearIcon: <CloseOutlined/> }}
                            type="text"/>
                 </Form.Item>
             </Form>
