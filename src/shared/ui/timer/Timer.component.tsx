@@ -5,11 +5,11 @@ import { TimerComponentProps } from "./types";
 const { Text } = Typography;
 
 export const Timer = ({ setTimeIsUp }: TimerComponentProps) => {
-    const [time, setTime_] = useState(60);
+    const [time, setTime] = useState(60);
     const [isCounting, setCounting] = useState(true);
     useEffect(() => {
         const interval = setInterval(() => {
-            isCounting && setTime_(time >= 1 ? time - 1 : 0);
+            isCounting && setTime(time >= 1 ? time - 1 : 0);
         }, 1000);
         if (time === 0) {
             setCounting(false);
