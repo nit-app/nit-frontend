@@ -9,4 +9,16 @@
   .title {
     @include display-flex($gap: 4px);
   }
+
+  form {
+    width: 100%;
+
+    .ant-form-item {
+      margin-bottom: 16px;
+    }
+  }
+
+  .submit {
+    width: 100%;
+  }
 }
