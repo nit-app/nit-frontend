@@ -2,7 +2,7 @@ import { Response, Server } from "miragejs";
 import { AppSchema, User } from "../../types";
 
 export function routesForUsers(server: Server) {
-    server.get(`/users`, (schema: AppSchema, request) => {
+    server.get("/users", (schema: AppSchema) => {
         const users = schema.all("user");
         const seconds = new Date().getSeconds();
         return seconds % 17 === 0

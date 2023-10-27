@@ -45,7 +45,7 @@ export function useMask({ pattern, skipSymbol, allowValues }: useMaskProps) {
         setBack(false);
     }, [value, back]);
 
-    const blur = useCallback((event: React.FocusEvent<HTMLInputElement>) => {
+    const blur = useCallback(() => {
         return value === pattern && (setValue(""));
     }, [value, setValue]);
 

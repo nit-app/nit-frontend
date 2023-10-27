@@ -1,1 +1,1 @@
-export {Timer} from "./Timer.component";
+export { Timer } from "./Timer.component";

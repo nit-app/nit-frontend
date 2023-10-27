@@ -1,1 +1,1 @@
-export {usePostRegistration} from "./useRegistration.post"
+export { usePostRegistration } from "./useRegistration.post";
