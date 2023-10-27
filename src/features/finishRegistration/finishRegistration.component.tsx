@@ -10,7 +10,7 @@ const { Title } = Typography;
 export const FinishRegistrationComponent = () => {
     const router = useRouter();
     const locale = ru;
-    const { enterYourData, createAccount } = locale.finishRegistrationForm.label.defaults;
+    const { enterYourData } = locale.finishRegistrationForm.label.defaults;
     const { helps, placeholders, labels } = locale.form;
     const onFinish = () => {
         router.push("/");
@@ -82,7 +82,7 @@ export const FinishRegistrationComponent = () => {
                 </Form.Item>
                 <Form.Item>
                     <Button className={styles.submit} type="primary" htmlType="submit">
-                        {createAccount}
+                        {labels.defaults.createAccount}
                     </Button>
                 </Form.Item>
             </Form>
