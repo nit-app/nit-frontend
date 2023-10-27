@@ -3,9 +3,12 @@ import { useRouter } from "next/router";
 import { useMask } from "@/shared/hooks";
 import styles from "@/features/login/style.module.scss";
 import { Logo } from "@/shared/elements/logo";
-import { Button, Form, Input, Typography } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 import ru from "../../../public/locales/ru/content.json";
+import { Form } from "@/shared/ui/form";
+import { Input } from "@/shared/ui/input";
+import { Button } from "@/shared/ui/button";
+import { Typography } from "@/shared/ui/typography";
 
 const { Text, Link, Title } = Typography;
 export const RegistrationComponent: React.FC = () => {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Typography } from "antd";
 import { TimerComponentProps } from "./types";
+import { Typography } from "@/shared/ui/typography";
 
 const { Text } = Typography;
 
