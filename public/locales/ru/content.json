@@ -3,40 +3,54 @@
   "enterCodeForm": {
     "labels": {
       "defaults": {
-        "sendCode": "Отправили код подтверждения на номер ",
+        "sendCode": "Отправили код подтверждения на номер",
         "enterCode": "Введите код",
         "sendAgain": "Отправить ещё раз",
-        "sendAgainPerSeconds": "Отправим код повторно через ",
+        "sendAgainPerSeconds": "Отправим код повторно через",
         "seconds": "секунд"
       }
     }
   },
   "finishRegistrationForm": {
-    "label": {
+    "labels": {
       "defaults": {
-        "enterYourData": "Введите свои данные"
+        "enterYourData": "Введите свои данные",
+        "enterYourName": "Введите Ваше имя",
+        "enterYourSurname": "Введите Вашу фамилию",
+        "createAccount": "Создать аккаунт"
+      }
+    },
+    "placeholders": {
+      "defaults": {
+        "name": "Имя",
+        "surname": "Фамилия"
       }
     }
   },
   "registrationForm": {
-    "label": {
+    "labels": {
       "defaults": {
-        "alreadyHaveAccount": "Уже есть аккаунт? "
+        "alreadyHaveAccount": "Уже есть аккаунт?",
+        "weSendCode": "Мы отправим код подтверждения",
+        "createAccount": "Создать аккаунт",
+        "enter": "Войти",
+        "further": "Получить код"
+      }
+    },
+    "placeholders": {
+      "defaults": {
+        "phone": "Телефон"
       }
     }
   },
-  "form": {
+  "loginForm": {
     "labels": {
       "defaults": {
-        "createAccount": "Создать аккаунт",
         "enter": "Войти",
-        "loginAccount":"Вход в акаунт",
+        "loginAccount": "Вход в акаунт",
         "weSendCode": "Мы отправим код подтверждения",
         "further": "Далее",
-        "enterYourName": "Введите Ваше имя",
-        "enterYourSurname": "Введите Вашу фамилию",
-        "enterYourPassword": "Введите пароль",
-        "confirmPassword": "Подтвердите ваш пароль"
+        "createAccount": "Создать аккаунт"
       }
     },
     "placeholders": {
@@ -44,16 +58,26 @@
         "name": "Имя",
         "surname": "Фамилия",
         "password": "Пароль",
-        "repeatPassword": "Повторите пароль",
         "phone": "Телефон"
       }
+    }
+  },
+  "declensions": {
+    "second": {
+      "n": "секунда",
+      "g": "секунды",
+      "d": "секунде",
+      "a": "секунду",
+      "c": "секундой",
+      "p": "секунде"
     },
-    "helps": {
-      "defaults": {
-        "passwordDontMatch": "Пароли не совпадают",
-        "confirmYourPassword": "Подтвердите ваш пароль",
-        "mustBeLeast8CharactersLong": "Должно быть не менее 8 символов"
-      }
+    "seconds": {
+      "n": "секунды",
+      "g": "секунд",
+      "d": "секундам",
+      "a": "секунды",
+      "c": "секундами",
+      "p": "секундах"
     }
   }
 }

@@ -2,18 +2,16 @@ import React from "react";
 import { Logo } from "@/shared/elements/logo";
 import styles from "./style.module.scss";
 import { useRouter } from "next/router";
-import ru from "@/../public/locales/ru/content.json";
 import { Typography } from "@/shared/ui/typography";
 import { Form } from "@/shared/ui/form";
 import { Input } from "@/shared/ui/input";
 import { Button } from "@/shared/ui/button";
+import { Namespace, useTranslation } from "@/shared/translation";
 
 const { Title } = Typography;
 export const FinishRegistrationComponent = () => {
     const router = useRouter();
-    const locale = ru;
-    const { enterYourData } = locale.finishRegistrationForm.label.defaults;
-    const { helps, placeholders, labels } = locale.form;
+    const { t } = useTranslation(Namespace.content);
     const onFinish = () => {
         router.push("/");
     };
@@ -21,7 +19,7 @@ export const FinishRegistrationComponent = () => {
         <div className={styles.container}>
             <Logo/>
             <Title className={styles.title}
-                   level={3}>{enterYourData}</Title>
+                   level={3}>{t("finishRegistrationForm:labels:defaults:enterYourData")}</Title>
             <Form
                 onFinish={onFinish}
                 colon={false}
@@ -31,60 +29,24 @@ export const FinishRegistrationComponent = () => {
                     rules={[
                         {
                             required: true,
-                            message: labels.defaults.enterYourName,
+                            message: t("finishRegistrationForm:labels:defaults:enterYourName")
                         },
                     ]}>
-                    <Input placeholder={placeholders.defaults.name}/>
+                    <Input placeholder={t("finishRegistrationForm:placeholders:defaults:name")}/>
                 </Form.Item>
                 <Form.Item
                     name="surname"
                     rules={[
                         {
                             required: true,
-                            message: labels.defaults.enterYourSurname,
+                            message: t("finishRegistrationForm:labels:defaults:enterYourSurname"),
                         },
                     ]}>
-                    <Input placeholder={placeholders.defaults.surname}/>
-                </Form.Item>
-                <Form.Item
-                    style={{ marginBottom: 40 }}
-                    name="password"
-                    rules={[
-                        {
-                            required: true,
-                            message: labels.defaults.enterYourPassword,
-                        },
-                    ]}
-                    help={helps.defaults.mustBeLeast8CharactersLong}
-                    hasFeedback
-                >
-                    <Input.Password minLength={8} placeholder={placeholders.defaults.password}/>
-                </Form.Item>
-
-                <Form.Item
-                    name="confirm"
-                    dependencies={["password"]}
-                    hasFeedback
-                    rules={[
-                        {
-                            required: true,
-                            message: helps.defaults.confirmYourPassword,
-                        },
-                        ({ getFieldValue }) => ({
-                            validator(_, value) {
-                                if (!value || getFieldValue("password") === value) {
-                                    return Promise.resolve();
-                                }
-                                return Promise.reject(new Error(helps.defaults.passwordDontMatch));
-                            },
-                        }),
-                    ]}
-                >
-                    <Input.Password minLength={8} placeholder={placeholders.defaults.repeatPassword}/>
+                    <Input placeholder={t("finishRegistrationForm:placeholders:defaults:surname")}/>
                 </Form.Item>
                 <Form.Item>
                     <Button className={styles.submit} type="primary" htmlType="submit">
-                        {labels.defaults.createAccount}
+                        {t("finishRegistrationForm:labels:defaults:createAccount")}
                     </Button>
                 </Form.Item>
             </Form>

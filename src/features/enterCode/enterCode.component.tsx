@@ -5,36 +5,55 @@ import styles from "./style.module.scss";
 import { CloseOutlined } from "@ant-design/icons";
 import { useRouter } from "next/router";
 import { EnterCodeComponentProps } from "./types";
-import ru from "@/../public/locales/ru/content.json";
 import { Form } from "@/shared/ui/form";
 import { Input } from "@/shared/ui/input";
 import { Typography } from "@/shared/ui/typography";
+import { Namespace, useTranslation } from "@/shared/translation";
+import { declensions } from "@/shared/hooks";
 
 const { Text, Link, Title } = Typography;
+
+
+const NewLinkTimer = () => {
+    const [timeLeft, setTimeLeft] = useState(60);
+    const [timeStop, setTimeStop] = useState(false);
+    const { t } = useTranslation(Namespace.content);
+    const getSecondDeclension = declensions.useSecondDeclension();
+    if (timeStop) {
+        return (
+            <Link
+                href="#"
+                onClick={() => setTimeStop(!timeStop)}>
+                {t("enterCodeForm:labels:defaults:sendAgain")}
+            </Link>
+        );
+    }
+
+    return (
+        <Text>
+            {t("enterCodeForm:labels:defaults:sendAgainPerSeconds")}
+            <Timer setTimeIsUp={setTimeStop} setCurrentCount={setTimeLeft}/> {getSecondDeclension(timeLeft)}
+        </Text>);
+};
+
 export const EnterCodeComponent = ({ link, phone }: EnterCodeComponentProps) => {
     const router = useRouter();
-    const { seconds, sendCode, sendAgainPerSeconds, sendAgain, enterCode } = ru?.enterCodeForm?.labels.defaults;
+    const { t } = useTranslation(Namespace.content);
     const [value, setValue] = useState("");
-    const [timeStop, setTimeStop] = useState(false);
+
     useEffect(() => {
         if (value.length === 4) {
             router.push(link);
         }
     }, [value]);
-    const getNewLink = () => {
-        if (timeStop) {
-            return <Link href="#"
-                         onClick={() => setTimeStop(!timeStop)}>{sendAgain}</Link>;
-        }
-        return <Text>{sendAgainPerSeconds}<Timer
-            setTimeIsUp={setTimeStop}/> {seconds}</Text>;
-    };
+
+
     return (
         <div className={styles.container}>
             <Logo/>
             <div className={styles.title}>
-                <Title style={{ margin: 0 }} level={3}>{enterCode}</Title>
-                <Text className={styles.description}>{sendCode}{phone}</Text>
+                <Title style={{ margin: 0 }} level={3}>{t("enterCodeForm:labels:defaults:enterCode")}</Title>
+                <Text className={styles.description}>{t("enterCodeForm:labels:defaults:sendCode")}{phone}</Text>
             </div>
             <Form
                 name="enterCodeForm"
@@ -50,7 +69,7 @@ export const EnterCodeComponent = ({ link, phone }: EnterCodeComponentProps) => 
                            type="text"/>
                 </Form.Item>
             </Form>
-            {getNewLink()}
+            <NewLinkTimer/>
         </div>
     );
 };

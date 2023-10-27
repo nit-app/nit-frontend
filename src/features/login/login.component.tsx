@@ -4,33 +4,35 @@ import styles from "./style.module.scss";
 import { CloseOutlined } from "@ant-design/icons";
 import { Logo } from "@/shared/elements/logo";
 import { useRouter } from "next/router";
-import ru from "../../../public/locales/ru/content.json";
 import { Typography } from "@/shared/ui/typography";
 import { Form } from "@/shared/ui/form";
 import { Input } from "@/shared/ui/input";
 import { Button } from "@/shared/ui/button";
+import { Namespace, useTranslation } from "@/shared/translation";
 
 
 const { Text, Link, Title } = Typography;
 export const LoginComponent: React.FC = () => {
     const router = useRouter();
-    const locale = ru;
-    const { placeholders, labels } = locale.form;
+    const { t } = useTranslation(Namespace.content);
     const { value, keydown, format, blur, setValue } = useMask({
-        pattern: "+7 (000) 000 00-00",
-        skipSymbol: "0",
+        pattern: "+7 (___) ___-__-__",
+        skipSymbol: "_",
     });
+
     const onFinishHandler = () => {
         router.push("/login/enterCode");
     };
+
     return (
         <div className={styles.container}>
             <Logo/>
             <div className={styles.title}>
-                <Title style={{ margin: 0 }} level={3}>{labels.defaults.loginAccount}</Title>
-                <Text>Впервые тут? <Link href="/registration">{labels.defaults.createAccount}</Link></Text>
+                <Title style={{ margin: 0 }} level={3}>{t("loginForm:labels:defaults:loginAccount")}</Title>
+                <Text>Впервые тут? <Link
+                    href="/registration">{t("loginForm:labels:defaults:createAccount")}</Link></Text>
             </div>
-            <Text>{labels.defaults.weSendCode}</Text>
+            <Text>{t("loginForm:labels:defaults:weSendCode")}</Text>
             <Form
                 name="loginForm"
                 autoComplete="true"
@@ -45,12 +47,12 @@ export const LoginComponent: React.FC = () => {
                         onKeyDown={keydown}
                         onBlur={blur}
                         type="text"
-                        placeholder={placeholders.defaults.phone}
+                        placeholder={t("loginForm:placeholders:defaults:phone")}
                     />
                 </Form.Item>
                 <Form.Item>
                     <Button className={styles.submit} type="primary" htmlType="submit">
-                        {labels.defaults.further}
+                        {t("loginForm:labels:defaults:further")}
                     </Button>
                 </Form.Item>
             </Form>

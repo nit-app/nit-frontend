@@ -4,33 +4,33 @@ import { useMask } from "@/shared/hooks";
 import styles from "@/features/login/style.module.scss";
 import { Logo } from "@/shared/elements/logo";
 import { CloseOutlined } from "@ant-design/icons";
-import ru from "../../../public/locales/ru/content.json";
 import { Form } from "@/shared/ui/form";
 import { Input } from "@/shared/ui/input";
 import { Button } from "@/shared/ui/button";
 import { Typography } from "@/shared/ui/typography";
+import { Namespace, useTranslation } from "@/shared/translation";
 
 const { Text, Link, Title } = Typography;
+
 export const RegistrationComponent: React.FC = () => {
     const router = useRouter();
-    const locale = ru;
-    const { alreadyHaveAccount } = locale.registrationForm.label.defaults;
-    const { placeholders, labels } = locale.form;
+    const { t } = useTranslation(Namespace.content);
     const { value, keydown, format, blur, setValue } = useMask({
-        pattern: "+7 (000) 000 00-00",
+        pattern: "+7 (___) ___-__-__",
         skipSymbol: "0",
     });
     const onFinishHandler = () => {
         router.push("/registration/enterCode");
     };
+
     return (
         <div className={styles.container}>
             <Logo/>
             <div className={styles.title}>
-                <Title style={{ margin: 0 }} level={3}>{labels.defaults.createAccount}</Title>
-                <Text> <Link href="/login">{labels.defaults.enter}</Link></Text>
+                <Title style={{ margin: 0 }} level={3}>{t("registrationForm:labels:defaults:createAccount")}</Title>
+                <Text>{t("registrationForm:labels:defaults:alreadyHaveAccount")} <Link href="/login">{t("registrationForm:labels:defaults:enter")}</Link></Text>
             </div>
-            <Text>{alreadyHaveAccount}{labels.defaults.weSendCode}</Text>
+            <Text>{t("registrationForm:labels:defaults:weSendCode")}</Text>
             <Form
                 name="loginForm"
                 autoComplete="true"
@@ -45,12 +45,12 @@ export const RegistrationComponent: React.FC = () => {
                         onKeyDown={keydown}
                         onBlur={blur}
                         type="text"
-                        placeholder={placeholders.defaults.phone}
+                        placeholder={t("registrationForm:placeholders:defaults:phone")}
                     />
                 </Form.Item>
                 <Form.Item>
                     <Button className={styles.submit} type="primary" htmlType="submit">
-                        {labels.defaults.further}
+                        {t("registrationForm:labels:defaults:further")}
                     </Button>
                 </Form.Item>
             </Form>
