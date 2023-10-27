@@ -1,1 +1,1 @@
-export {postRegistration} from "./registration.post"
+export { postRegistration } from "./registration.post";

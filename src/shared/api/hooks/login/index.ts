@@ -1,1 +1,1 @@
-export {usePostLogin} from "./useLogin.post";
+export { usePostLogin } from "./useLogin.post";

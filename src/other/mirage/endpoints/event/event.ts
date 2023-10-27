@@ -2,7 +2,7 @@ import { Server, Response } from "miragejs";
 import { faker } from "@faker-js/faker";
 
 export function routesForEvent(server: Server) {
-    server.get("/event/all", (schema, request) => {
+    server.get("/event/all", (schema) => {
         const events = schema.all("event");
         const seconds = new Date().getSeconds();
         return seconds % 17 === 0

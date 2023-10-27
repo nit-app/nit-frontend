@@ -1,0 +1,25 @@
+@import "src/shared/styles/mixins";
+
+.container {
+  @extend %absolute-to-center;
+  @include display-flex;
+  min-width: 360px;
+  min-height: 174px;
+
+  .title {
+    @include display-flex($gap: 4px);
+
+    .description {
+      max-width: 218px;
+      text-align: center;
+    }
+  }
+
+  form {
+    width: 100%;
+
+    * {
+      margin-bottom: 0;
+    }
+  }
+}

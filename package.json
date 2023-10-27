@@ -24,6 +24,7 @@
     "react-i18next": "^13.2.2"
   },
   "devDependencies": {
+    "typescript-plugin-css-modules": "^5.0.2",
     "@faker-js/faker": "^8.1.0",
     "@types/node": "latest",
     "@types/react": "latest",
@@ -32,6 +33,7 @@
     "eslint-config-next": "^13.5.3",
     "miragejs": "^0.1.47",
     "nodemon": "^3.0.1",
+    "sass": "^1.69.4",
     "typescript": "latest"
   }
 }
