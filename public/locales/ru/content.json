@@ -1,3 +1,59 @@
 {
-  "hello": "Привет, nIT!"
+  "hello": "Привет, nIT!",
+  "enterCodeForm": {
+    "labels": {
+      "defaults": {
+        "sendCode": "Отправили код подтверждения на номер ",
+        "enterCode": "Введите код",
+        "sendAgain": "Отправить ещё раз",
+        "sendAgainPerSeconds": "Отправим код повторно через ",
+        "seconds": "секунд"
+      }
+    }
+  },
+  "finishRegistrationForm": {
+    "label": {
+      "defaults": {
+        "enterYourData": "Введите свои данные"
+      }
+    }
+  },
+  "registrationForm": {
+    "label": {
+      "defaults": {
+        "alreadyHaveAccount": "Уже есть аккаунт? "
+      }
+    }
+  },
+  "form": {
+    "labels": {
+      "defaults": {
+        "createAccount": "Создать аккаунт",
+        "enter": "Войти",
+        "loginAccount":"Вход в акаунт",
+        "weSendCode": "Мы отправим код подтверждения",
+        "further": "Далее",
+        "enterYourName": "Введите Ваше имя",
+        "enterYourSurname": "Введите Вашу фамилию",
+        "enterYourPassword": "Введите пароль",
+        "confirmPassword": "Подтвердите ваш пароль"
+      }
+    },
+    "placeholders": {
+      "defaults": {
+        "name": "Имя",
+        "surname": "Фамилия",
+        "password": "Пароль",
+        "repeatPassword": "Повторите пароль",
+        "phone": "Телефон"
+      }
+    },
+    "helps": {
+      "defaults": {
+        "passwordDontMatch": "Пароли не совпадают",
+        "confirmYourPassword": "Подтвердите ваш пароль",
+        "mustBeLeast8CharactersLong": "Должно быть не менее 8 символов"
+      }
+    }
+  }
 }
