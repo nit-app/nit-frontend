@@ -5,10 +5,14 @@ import styles from "@/features/login/style.module.scss";
 import { Logo } from "@/shared/elements/logo";
 import { Button, Form, Input, Typography } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
+import ru from "../../../public/locales/ru/content.json";
 
 const { Text, Link, Title } = Typography;
 export const RegistrationComponent: React.FC = () => {
     const router = useRouter();
+    const locale = ru;
+    const { alreadyHaveAccount } = locale.registrationForm.label.defaults;
+    const { placeholders, labels } = locale.form;
     const { value, keydown, format, blur, setValue } = useMask({
         pattern: "+7 (000) 000 00-00",
         skipSymbol: "0",
@@ -20,10 +24,10 @@ export const RegistrationComponent: React.FC = () => {
         <div className={styles.container}>
             <Logo/>
             <div className={styles.title}>
-                <Title style={{ margin: 0 }} level={3}>Создать аккаунт</Title>
-                <Text>Уже есть аккаунт? <Link href="/login">Войти</Link></Text>
+                <Title style={{ margin: 0 }} level={3}>{labels.defaults.createAccount}</Title>
+                <Text> <Link href="/login">{labels.defaults.enter}</Link></Text>
             </div>
-            <Text>Мы отправим код подтверждения</Text>
+            <Text>{alreadyHaveAccount}{labels.defaults.weSendCode}</Text>
             <Form
                 name="loginForm"
                 autoComplete="true"
@@ -38,12 +42,12 @@ export const RegistrationComponent: React.FC = () => {
                         onKeyDown={keydown}
                         onBlur={blur}
                         type="text"
-                        placeholder="Телефон"
+                        placeholder={placeholders.defaults.phone}
                     />
                 </Form.Item>
                 <Form.Item>
                     <Button className={styles.submit} type="primary" htmlType="submit">
-                        Далее
+                        {labels.defaults.further}
                     </Button>
                 </Form.Item>
             </Form>

@@ -4,17 +4,22 @@ import { Button, Form, Input } from "antd";
 import styles from "./style.module.scss";
 import { Typography } from "antd";
 import { useRouter } from "next/router";
+import ru from "@/../public/locales/ru/content.json";
 
 const { Title } = Typography;
 export const FinishRegistrationComponent = () => {
     const router = useRouter();
+    const locale = ru;
+    const { enterYourData } = locale.finishRegistrationForm.label.defaults;
+    const { helps, placeholders, labels } = locale.form;
     const onFinish = () => {
         router.push("/");
     };
     return (
         <div className={styles.container}>
             <Logo/>
-            <Title className={styles.title} level={3}>Введите свои данные</Title>
+            <Title className={styles.title}
+                   level={3}>{enterYourData}</Title>
             <Form
                 onFinish={onFinish}
                 colon={false}
@@ -24,20 +29,20 @@ export const FinishRegistrationComponent = () => {
                     rules={[
                         {
                             required: true,
-                            message: "Введите Ваше имя",
+                            message: labels.defaults.enterYourName,
                         },
                     ]}>
-                    <Input placeholder="Имя"/>
+                    <Input placeholder={placeholders.defaults.name}/>
                 </Form.Item>
                 <Form.Item
                     name="surname"
                     rules={[
                         {
                             required: true,
-                            message: "Введите Вашу фамилию",
+                            message: labels.defaults.enterYourSurname,
                         },
                     ]}>
-                    <Input placeholder="Фамилия"/>
+                    <Input placeholder={placeholders.defaults.surname}/>
                 </Form.Item>
                 <Form.Item
                     style={{ marginBottom: 40 }}
@@ -45,13 +50,13 @@ export const FinishRegistrationComponent = () => {
                     rules={[
                         {
                             required: true,
-                            message: "Введите пароль",
+                            message: labels.defaults.enterYourPassword,
                         },
                     ]}
-                    help="Должно быть не менее 8 символов"
+                    help={helps.defaults.mustBeLeast8CharactersLong}
                     hasFeedback
                 >
-                    <Input.Password minLength={8} placeholder="Пароль"/>
+                    <Input.Password minLength={8} placeholder={placeholders.defaults.password}/>
                 </Form.Item>
 
                 <Form.Item
@@ -61,23 +66,23 @@ export const FinishRegistrationComponent = () => {
                     rules={[
                         {
                             required: true,
-                            message: "Подтвердите ваш пароль",
+                            message: helps.defaults.confirmYourPassword,
                         },
                         ({ getFieldValue }) => ({
                             validator(_, value) {
                                 if (!value || getFieldValue("password") === value) {
                                     return Promise.resolve();
                                 }
-                                return Promise.reject(new Error("Пароли не совпадают"));
+                                return Promise.reject(new Error(helps.defaults.passwordDontMatch));
                             },
                         }),
                     ]}
                 >
-                    <Input.Password minLength={8} placeholder="Повторите пароль"/>
+                    <Input.Password minLength={8} placeholder={placeholders.defaults.repeatPassword}/>
                 </Form.Item>
                 <Form.Item>
                     <Button className={styles.submit} type="primary" htmlType="submit">
-                        Создать аккаунт
+                        {labels.defaults.createAccount}
                     </Button>
                 </Form.Item>
             </Form>

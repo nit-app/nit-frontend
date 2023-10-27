@@ -6,10 +6,12 @@ import styles from "./style.module.scss";
 import { CloseOutlined } from "@ant-design/icons";
 import { useRouter } from "next/router";
 import { EnterCodeComponentProps } from "./types";
+import ru from "@/../public/locales/ru/content.json";
 
 const { Text, Link, Title } = Typography;
 export const EnterCodeComponent = ({ link, phone }: EnterCodeComponentProps) => {
     const router = useRouter();
+    const { seconds, sendCode, sendAgainPerSeconds, sendAgain, enterCode } = ru?.enterCodeForm?.labels.defaults;
     const [value, setValue] = useState("");
     const [timeStop, setTimeStop] = useState(false);
     useEffect(() => {
@@ -19,17 +21,18 @@ export const EnterCodeComponent = ({ link, phone }: EnterCodeComponentProps) => 
     }, [value]);
     const getNewLink = () => {
         if (timeStop) {
-            return <Link href="#" onClick={() => setTimeStop(!timeStop)}>Отправить ещё раз</Link>;
+            return <Link href="#"
+                         onClick={() => setTimeStop(!timeStop)}>{sendAgain}</Link>;
         }
-        return <Text>Отправим код повторно через <Timer setTimeIsUp={setTimeStop}/> секунд</Text>;
+        return <Text>{sendAgainPerSeconds}<Timer
+            setTimeIsUp={setTimeStop}/> {seconds}</Text>;
     };
     return (
         <div className={styles.container}>
             <Logo/>
             <div className={styles.title}>
-                <Title style={{ margin: 0 }} level={3}>Введите код</Title>
-                <Text className={styles.description}>Отправили код подтверждения
-                    на номер {phone}</Text>
+                <Title style={{ margin: 0 }} level={3}>{enterCode}</Title>
+                <Text className={styles.description}>{sendCode}{phone}</Text>
             </div>
             <Form
                 name="enterCodeForm"
