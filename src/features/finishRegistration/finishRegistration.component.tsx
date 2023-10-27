@@ -1,10 +1,12 @@
 import React from "react";
 import { Logo } from "@/shared/elements/logo";
-import { Button, Form, Input } from "antd";
 import styles from "./style.module.scss";
-import { Typography } from "antd";
 import { useRouter } from "next/router";
 import ru from "@/../public/locales/ru/content.json";
+import { Typography } from "@/shared/ui/typography";
+import { Form } from "@/shared/ui/form";
+import { Input } from "@/shared/ui/input";
+import { Button } from "@/shared/ui/button";
 
 const { Title } = Typography;
 export const FinishRegistrationComponent = () => {

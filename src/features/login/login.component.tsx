@@ -1,11 +1,14 @@
 import React from "react";
 import { useMask } from "@/shared/hooks";
-import { Button, Form, Input, Typography } from "antd";
 import styles from "./style.module.scss";
 import { CloseOutlined } from "@ant-design/icons";
 import { Logo } from "@/shared/elements/logo";
 import { useRouter } from "next/router";
 import ru from "../../../public/locales/ru/content.json";
+import { Typography } from "@/shared/ui/typography";
+import { Form } from "@/shared/ui/form";
+import { Input } from "@/shared/ui/input";
+import { Button } from "@/shared/ui/button";
 
 
 const { Text, Link, Title } = Typography;

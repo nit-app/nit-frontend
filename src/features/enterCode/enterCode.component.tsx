@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Timer } from "@/shared/ui/timer";
 import { Logo } from "@/shared/elements/logo";
-import { Form, Input, Typography } from "antd";
 import styles from "./style.module.scss";
 import { CloseOutlined } from "@ant-design/icons";
 import { useRouter } from "next/router";
 import { EnterCodeComponentProps } from "./types";
 import ru from "@/../public/locales/ru/content.json";
+import { Form } from "@/shared/ui/form";
+import { Input } from "@/shared/ui/input";
+import { Typography } from "@/shared/ui/typography";
 
 const { Text, Link, Title } = Typography;
 export const EnterCodeComponent = ({ link, phone }: EnterCodeComponentProps) => {
