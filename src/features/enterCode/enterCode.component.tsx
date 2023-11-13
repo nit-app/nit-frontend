@@ -11,6 +11,8 @@ import { Namespace, useTranslation } from "@/shared/translation";
 import { declensions, useGetPathRoute, useMutationFromKey } from "@/shared/hooks";
 import { useLoginConfirm } from "@/shared/api/hooks/login/useLoginConfirm";
 import { useRegistrationConfirm } from "@/shared/api/hooks";
+import { UseMutateAsyncFunction } from "@tanstack/react-query";
+import { BaseRespnonse } from "@/shared/api/queries/types";
 
 const { Text, Link, Title } = Typography;
 
@@ -37,25 +39,14 @@ const NewLinkTimer = () => {
         </Text>);
 };
 
-const useGetCurrentHook = (previousPage: "login" | "registration") => {
-    if (previousPage === "login") {
-        return useLoginConfirm();
-    }
-    return useRegistrationConfirm();
-};
+interface EnterCodeBasicComponent {
+    mutateAsync: UseMutateAsyncFunction<BaseRespnonse, unknown, string, unknown>;
+    path: string;
+}
 
-export const EnterCodeComponent = () => {
-    const router = useRouter();
+export const EnterCodeBasicComponent = ({ mutateAsync, path }: EnterCodeBasicComponent) => {
     const { t } = useTranslation(Namespace.content);
-    const path = useGetPathRoute({ router: router }) as "login" | "registration";
-    const { mutateState } = useMutationFromKey(["sendCode", path === "login" ? "login" : "registration"]);
-    const { mutateAsync, isLoading, isError } = useGetCurrentHook(path);
-    useEffect(() => {
-        if (isLoading && isLoading) {
-            // for tests, an error was specifically made in the condition
-            path === "login" ? router.push("/") : router.push("/registration/finish");
-        }
-    }, [isLoading, isError]);
+    const { mutateState } = useMutationFromKey(["sendCode", path]);
     return (
         <div className={styles.container}>
             <Logo/>
