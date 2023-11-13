@@ -49,7 +49,6 @@ export const EnterCodeComponent = () => {
     const { t } = useTranslation(Namespace.content);
     const path = useGetPathRoute({ router: router }) as "login" | "registration";
     const { mutateState } = useMutationFromKey(["sendCode", path === "login" ? "login" : "registration"]);
-    console.log(mutateState, path);
     const { mutateAsync, isLoading, isError } = useGetCurrentHook(path);
     useEffect(() => {
         if (isLoading && isLoading) {
