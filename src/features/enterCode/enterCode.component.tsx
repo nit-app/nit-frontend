@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Timer } from "@/shared/ui/timer";
 import { Logo } from "@/shared/elements/logo";
 import styles from "./style.module.scss";
 import { CloseOutlined } from "@ant-design/icons";
-import { useRouter } from "next/router";
 import { Form } from "@/shared/ui/form";
 import { Input } from "@/shared/ui/input";
 import { Typography } from "@/shared/ui/typography";
 import { Namespace, useTranslation } from "@/shared/translation";
-import { declensions, useGetPathRoute, useMutationFromKey } from "@/shared/hooks";
-import { useLoginConfirm } from "@/shared/api/hooks/login/useLoginConfirm";
-import { useRegistrationConfirm } from "@/shared/api/hooks";
+import { declensions, useMutationFromKey } from "@/shared/hooks";
 import { UseMutateAsyncFunction } from "@tanstack/react-query";
 import { BaseRespnonse } from "@/shared/api/queries/types";
 
