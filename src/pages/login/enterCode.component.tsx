@@ -1,6 +1,5 @@
-import React from "react";
-import { EnterCode } from "@/features/enterCode";
+import { EnterCodeLogin } from "@/features/enterCode";
 
 export function EnterCodePage() {
-    return <EnterCode link="/" phone=""/>;
+    return <EnterCodeLogin/>;
 }
