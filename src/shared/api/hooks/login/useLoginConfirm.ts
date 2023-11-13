@@ -1,12 +1,12 @@
 import { useMutation } from "@tanstack/react-query";
 
-import { loginConfirm } from "@/shared/api/queries/login";
+import { loginConfirm as loginConfirmQueryFn } from "@/shared/api/queries/login";
 
 
 export function useLoginConfirm() {
-    const { mutateAsync, isLoading, isError } = useMutation(
+    const { mutateAsync: loginConfirm, isLoading: loginConfirmIsLoading, isError: loginConfirmIsError } = useMutation(
         ["confirmCode", "login"],
-        loginConfirm,
+        loginConfirmQueryFn,
     );
-    return { mutateAsync, isLoading, isError };
+    return { loginConfirm, loginConfirmIsLoading, loginConfirmIsError };
 }
