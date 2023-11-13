@@ -7,5 +7,9 @@ export function useRegistrationConfirm() {
         ["confirmCode", "registration"],
         registrationConfirm,
     );
-    return { mutateAsync, isLoading, isError };
+    return {
+        registrationConfirm: mutateAsync,
+        registrationConfirmIsLoading: isLoading,
+        registrationConfirmIsError: isError
+    };
 }
