@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Logo } from "@/shared/elements/logo";
 import styles from "./style.module.scss";
 import { useRouter } from "next/router";
@@ -7,13 +7,28 @@ import { Form } from "@/shared/ui/form";
 import { Input } from "@/shared/ui/input";
 import { Button } from "@/shared/ui/button";
 import { Namespace, useTranslation } from "@/shared/translation";
+import { useRegistrationFinish } from "@/shared/api/hooks";
+import { RegistrationFinishRequest } from "@/shared/api/queries/registration/types";
 
 const { Title } = Typography;
+
+type FinishRegistrationFieldType = {
+    firstName: string;
+    lastName: string;
+}
 export const FinishRegistrationComponent = () => {
     const router = useRouter();
     const { t } = useTranslation(Namespace.content);
-    const onFinish = () => {
-        router.push("/");
+    const { registrationFinish, registrationFinishIsError, registrationFinishIsLoading } = useRegistrationFinish();
+    useEffect(() => {
+        // for tests, an error was specifically made in the condition
+        if (registrationFinishIsError && !registrationFinishIsLoading) {
+            router.push("/");
+        }
+    }, [registrationFinishIsError, registrationFinishIsLoading]);
+    const onFinish = (values: FinishRegistrationFieldType) => {
+        registrationFinish(values as RegistrationFinishRequest)
+            .catch(e => console.log(e));//for testing in debug mode
     };
     return (
         <div className={styles.container}>
@@ -21,11 +36,12 @@ export const FinishRegistrationComponent = () => {
             <Title className={styles.title}
                    level={3}>{t("finishRegistrationForm:labels:defaults:enterYourData")}</Title>
             <Form
+                name="finishRegistrationForm"
                 onFinish={onFinish}
                 colon={false}
             >
-                <Form.Item
-                    name="name"
+                <Form.Item<FinishRegistrationFieldType>
+                    name="firstName"
                     rules={[
                         {
                             required: true,
@@ -34,8 +50,8 @@ export const FinishRegistrationComponent = () => {
                     ]}>
                     <Input placeholder={t("finishRegistrationForm:placeholders:defaults:name")}/>
                 </Form.Item>
-                <Form.Item
-                    name="surname"
+                <Form.Item<FinishRegistrationFieldType>
+                    name="lastName"
                     rules={[
                         {
                             required: true,
