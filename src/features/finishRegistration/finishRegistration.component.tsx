@@ -18,7 +18,7 @@ type FinishRegistrationFieldType = {
 export const FinishRegistrationComponent = () => {
     const router = useRouter();
     const { t } = useTranslation(Namespace.content);
-    const { registrationFinish, registrationFinishIsError, registrationFinishIsLoading } = useRegistrationFinish();
+    const { registrationFinish, registrationFinishIsLoading } = useRegistrationFinish();
 
     const onFinish = (values: FinishRegistrationFieldType) => {
         if (registrationFinishIsLoading) return;

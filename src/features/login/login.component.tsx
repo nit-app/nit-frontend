@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useMask } from "@/shared/hooks";
 import styles from "./style.module.scss";
 import { CloseOutlined } from "@ant-design/icons";
@@ -15,7 +15,7 @@ const { Text, Link, Title } = Typography;
 
 export const LoginComponent: React.FC = () => {
     const router = useRouter();
-    const { loginSendCodeIsLoading, loginSendCodeIsError, loginSendCode } = useLoginSendCode();
+    const { loginSendCodeIsLoading, loginSendCode } = useLoginSendCode();
     const { t } = useTranslation(Namespace.content);
     const { value, keydown, format, blur, setValue } = useMask({
         pattern: "+7 (___) ___-__-__",

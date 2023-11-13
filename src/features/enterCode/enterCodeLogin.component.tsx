@@ -4,7 +4,7 @@ import { useLoginConfirm } from "@/shared/api/hooks/login/useLoginConfirm";
 
 export const EnterCodeLoginComponent = () => {
     const router = useRouter();
-    const { loginConfirm, loginConfirmIsError, loginConfirmIsLoading } = useLoginConfirm();
+    const { loginConfirm, loginConfirmIsLoading } = useLoginConfirm();
     const onSubmit = async (code: string) => {
         return loginConfirm(code)
             .then(() => router.push("/"))
