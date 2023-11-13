@@ -3,11 +3,18 @@
   "enterCodeForm": {
     "labels": {
       "defaults": {
-        "sendCode": "Отправили код подтверждения на номер",
+        "sendCode": "Отправили код подтверждения на номер {{phone}}",
         "enterCode": "Введите код",
         "sendAgain": "Отправить ещё раз",
         "sendAgainPerSeconds": "Отправим код повторно через",
         "seconds": "секунд"
+      }
+    }
+  },
+  "forms": {
+    "labels": {
+      "defaults": {
+        "pleaseEnterCode": "Пожалуйста введите код"
       }
     }
   },
@@ -47,6 +54,7 @@
     "labels": {
       "defaults": {
         "enter": "Войти",
+        "firstTime": "Впервые тут? ",
         "loginAccount": "Вход в акаунт",
         "weSendCode": "Мы отправим код подтверждения",
         "further": "Далее",
