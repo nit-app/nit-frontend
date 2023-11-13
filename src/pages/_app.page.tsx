@@ -1,7 +1,6 @@
 import React from "react";
 import type { AppProps as NextAppProps } from "next/app";
 import Head from "next/head";
-import { QueryClient } from "@tanstack/query-core";
 import { QueryClientProvider } from "@tanstack/react-query";
 
 import { DefaultTags } from "@/shared/seo";
@@ -10,8 +9,8 @@ import "@/shared/styles/globals.css";
 
 import { AppProps } from "./_app.types";
 import { startMirage } from "@/other/mirage/config";
+import { queryClient } from "@/shared/api/hooks";
 
-const queryClient = new QueryClient();
 startMirage();
 
 function App({ Component, ...props }: NextAppProps<AppProps>) {
