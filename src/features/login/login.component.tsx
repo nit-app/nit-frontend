@@ -26,7 +26,7 @@ export const LoginComponent: React.FC = () => {
             .catch(e => console.log(e));//for testing in debug mode
     };
     useEffect(() => {
-        if (!loginSendCodeIsError && loginSendCodeIsLoading) {
+        if (loginSendCodeIsError && !loginSendCodeIsLoading) {
             // for tests, an error was specifically made in the condition
             router.push("/login/enterCode");
         }
