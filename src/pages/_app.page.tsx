@@ -6,12 +6,14 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { DefaultTags } from "@/shared/seo";
 import { appWithTranslation, key, Namespace, useTranslation } from "@/shared/translation";
 import "@/shared/styles/globals.css";
-
 import { AppProps } from "./_app.types";
-import { startMirage } from "@/other/mirage/config";
 import { queryClient } from "@/shared/api/hooks";
+import { startMirage } from "@/other/mirage/config";
 
-startMirage();
+
+if (process.env.MODE === "debug") {
+    startMirage();
+}
 
 function App({ Component, ...props }: NextAppProps<AppProps>) {
     const { pageProps } = props;

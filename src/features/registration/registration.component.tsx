@@ -20,21 +20,20 @@ export const RegistrationComponent: React.FC = () => {
         pattern: "+7 (___) ___-__-__",
         skipSymbol: "_",
     });
+
     const {
         registrationSendCodeIsLoading,
         registrationSendCode,
-        registrationSendCodeIsError
+        response
     } = useRegistrationSendCode();
+
     const onFinishHandler = () => {
+        if (registrationSendCodeIsLoading || response) return;
+
         registrationSendCode(value)
+            .then(() => router.push("/registration/enterCode"))
             .catch(e => console.log(e));//for testing in debug mode
     };
-    useEffect(() => {
-        if (!registrationSendCodeIsError && registrationSendCodeIsLoading) {
-            // for tests, an error was specifically made in the condition
-            router.push("/registration/enterCode");
-        }
-    }, [registrationSendCodeIsError, registrationSendCodeIsLoading]);
 
     return (
         <div className={styles.container}>
@@ -63,7 +62,7 @@ export const RegistrationComponent: React.FC = () => {
                     />
                 </Form.Item>
                 <Form.Item>
-                    <Button className={styles.submit} type="primary" htmlType="submit">
+                    <Button loading={registrationSendCodeIsLoading} className={styles.submit} type="primary" htmlType="submit">
                         {t("registrationForm:labels:defaults:further")}
                     </Button>
                 </Form.Item>

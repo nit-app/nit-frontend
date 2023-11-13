@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Logo } from "@/shared/elements/logo";
 import styles from "./style.module.scss";
 import { useRouter } from "next/router";
@@ -8,7 +8,6 @@ import { Input } from "@/shared/ui/input";
 import { Button } from "@/shared/ui/button";
 import { Namespace, useTranslation } from "@/shared/translation";
 import { useRegistrationFinish } from "@/shared/api/hooks";
-import { RegistrationFinishRequest } from "@/shared/api/queries/registration/types";
 
 const { Title } = Typography;
 
@@ -20,15 +19,12 @@ export const FinishRegistrationComponent = () => {
     const router = useRouter();
     const { t } = useTranslation(Namespace.content);
     const { registrationFinish, registrationFinishIsError, registrationFinishIsLoading } = useRegistrationFinish();
-    useEffect(() => {
-        // for tests, an error was specifically made in the condition
-        if (registrationFinishIsError && !registrationFinishIsLoading) {
-            router.push("/");
-        }
-    }, [registrationFinishIsError, registrationFinishIsLoading]);
+
     const onFinish = (values: FinishRegistrationFieldType) => {
-        registrationFinish(values as RegistrationFinishRequest)
-            .catch(e => console.log(e));//for testing in debug mode
+        if (registrationFinishIsLoading) return;
+        registrationFinish(values)
+            .then(() => router.push("/"))
+            .catch(e => console.log(e)); //for testing in debug mode
     };
     return (
         <div className={styles.container}>
@@ -61,7 +57,11 @@ export const FinishRegistrationComponent = () => {
                     <Input placeholder={t("finishRegistrationForm:placeholders:defaults:surname")}/>
                 </Form.Item>
                 <Form.Item>
-                    <Button className={styles.submit} type="primary" htmlType="submit">
+                    <Button
+                        loading={registrationFinishIsLoading}
+                        className={styles.submit}
+                        type="primary"
+                        htmlType="submit">
                         {t("finishRegistrationForm:labels:defaults:createAccount")}
                     </Button>
                 </Form.Item>

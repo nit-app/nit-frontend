@@ -8,8 +8,6 @@ import { Input } from "@/shared/ui/input";
 import { Typography } from "@/shared/ui/typography";
 import { Namespace, useTranslation } from "@/shared/translation";
 import { declensions, useMutationFromKey } from "@/shared/hooks";
-import { UseMutateAsyncFunction } from "@tanstack/react-query";
-import { BaseRespnonse } from "@/shared/api/queries/types";
 
 const { Text, Link, Title } = Typography;
 
@@ -36,14 +34,19 @@ const NewLinkTimer = () => {
         </Text>);
 };
 
-interface EnterCodeBasicComponent {
-    mutateAsync: UseMutateAsyncFunction<BaseRespnonse, unknown, string, unknown>;
+interface EnterCodeBasicComponentProps {
+    onSubmit: (code: string) => Promise<void>;
     path: string;
+    loading?: boolean;
 }
 
-export const EnterCodeBasicComponent = ({ mutateAsync, path }: EnterCodeBasicComponent) => {
+export const EnterCodeBasicComponent = ({ onSubmit, path, loading = false }: EnterCodeBasicComponentProps) => {
     const { t } = useTranslation(Namespace.content);
     const { mutateState } = useMutationFromKey(["sendCode", path]);
+    const onSubmitInner = async (code: string) => {
+        if (loading) return;
+        await onSubmit(code);
+    };
     return (
         <div className={styles.container}>
             <Logo/>
@@ -61,9 +64,9 @@ export const EnterCodeBasicComponent = ({ mutateAsync, path }: EnterCodeBasicCom
                     rules={[{ required: true, message: "" }, () => ({
                         validator(_, value) {
                             if (value.length === 4) {
-                                mutateAsync(value)
-                                    .catch(e => console.log(e));//for testing in debug mode
-                                return Promise.resolve();
+                                onSubmitInner(value)
+                                    .then(() => Promise.resolve())
+                                    .catch(Promise.reject);
                             }
                             return Promise.reject(new Error(t("forms:labels:defaults:pleaseEnterCode")));
                         },

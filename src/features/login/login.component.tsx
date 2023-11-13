@@ -23,14 +23,10 @@ export const LoginComponent: React.FC = () => {
     });
     const onFinishHandler = () => {
         loginSendCode(value)
-            .catch(e => console.log(e));//for testing in debug mode
+            .then(() => router.push("/login/enterCode"))
+            .catch(e => console.log(e)); //for testing in debug mode
     };
-    useEffect(() => {
-        if (loginSendCodeIsError && !loginSendCodeIsLoading) {
-            // for tests, an error was specifically made in the condition
-            router.push("/login/enterCode");
-        }
-    }, [loginSendCodeIsError, loginSendCodeIsLoading]);
+
     return (
         <div className={styles.container}>
             <Logo/>
@@ -59,7 +55,7 @@ export const LoginComponent: React.FC = () => {
                     />
                 </Form.Item>
                 <Form.Item>
-                    <Button className={styles.submit} type="primary" htmlType="submit">
+                    <Button loading={loginSendCodeIsLoading} className={styles.submit} type="primary" htmlType="submit">
                         {t("loginForm:labels:defaults:further")}
                     </Button>
                 </Form.Item>
