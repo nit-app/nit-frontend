@@ -1,2 +1,2 @@
-export { postLogin } from "./login.post";
-
+export { loginSendCode } from "./loginSendCode.post";
+export { loginConfirm } from "./loginConfirm.post";
