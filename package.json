@@ -1,6 +1,6 @@
 {
   "name": "nit-app",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "private": true,
   "scripts": {
     "dev": "nodemon --watch public --exec \"next dev\"",
