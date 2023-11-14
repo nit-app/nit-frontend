@@ -1,0 +1,24 @@
+name: cd
+
+on:
+  workflow_run:
+    workflows: ["ci"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy using ssh
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: 22
+        script: |
+          docker stop $(docker ps -a -q)
+          docker rmi -f $(docker images -a -q)
+          docker pull cr.yandex/${{ secrets.DOCKER_REGISTRY }}/nit-frontend:${{ github.sha }}
+          docker run -p 3000:3000 -d --restart always cr.yandex/${{ secrets.DOCKER_REGISTRY }}/nit-frontend:${{ github.sha }}
