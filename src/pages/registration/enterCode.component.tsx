@@ -1,5 +1,5 @@
-import { EnterCode as EnterCodeForm } from "@/features/enterCode";
+import { EnterCodeRegistration } from "@/features/enterCode";
 
-export function EnterCode() {
-    return <EnterCodeForm link="/registration/finish" phone=""/>;
+export function EnterCodePage() {
+    return <EnterCodeRegistration/>;
 }

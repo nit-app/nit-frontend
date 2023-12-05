@@ -1,8 +1,8 @@
-import { EnterCode } from "./enterCode.component";
+import { EnterCodePage } from "./enterCode.component";
 import { ssrTranslation } from "@/shared/translation/index.ssr";
 import { key, Namespace } from "@/shared/translation";
 
-export default EnterCode;
+export default EnterCodePage;
 
 export const getServerSideProps = async ({ locale }: { locale: string }) => {
     const { t, i18nSSRConfig } = await ssrTranslation(locale);

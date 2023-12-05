@@ -1,1 +1,3 @@
-export { postRegistration } from "./registration.post";
+export { registrationSendCode } from "./registrationSendCode.post";
+export { registrationConfirm } from "./registrationConfirm.post";
+export { registrationFinish } from "./registrationFinish.post";

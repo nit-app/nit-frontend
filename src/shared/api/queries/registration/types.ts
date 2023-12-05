@@ -1,12 +1,6 @@
-export interface RegistrationPostRequest {
-    nickname: string;
+export interface RegistrationFinishRequest {
     firstName: string;
     lastName: string;
-    password: string;
-    age: number;
-    sex: string;
 }
 
-export interface RegistrationPostResponse {
-    bearer: string;
-}
+

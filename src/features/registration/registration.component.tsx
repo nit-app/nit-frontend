@@ -9,6 +9,7 @@ import { Input } from "@/shared/ui/input";
 import { Button } from "@/shared/ui/button";
 import { Typography } from "@/shared/ui/typography";
 import { Namespace, useTranslation } from "@/shared/translation";
+import { useRegistrationSendCode } from "@/shared/api/hooks";
 
 const { Text, Link, Title } = Typography;
 
@@ -17,10 +18,21 @@ export const RegistrationComponent: React.FC = () => {
     const { t } = useTranslation(Namespace.content);
     const { value, keydown, format, blur, setValue } = useMask({
         pattern: "+7 (___) ___-__-__",
-        skipSymbol: "0",
+        skipSymbol: "_",
     });
+
+    const {
+        registrationSendCodeIsLoading,
+        registrationSendCode,
+        response
+    } = useRegistrationSendCode();
+
     const onFinishHandler = () => {
-        router.push("/registration/enterCode");
+        if (registrationSendCodeIsLoading || response) return;
+
+        registrationSendCode(value)
+            .then(() => router.push("/registration/enterCode"))
+            .catch(e => console.log(e));//for testing in debug mode
     };
 
     return (
@@ -28,7 +40,8 @@ export const RegistrationComponent: React.FC = () => {
             <Logo/>
             <div className={styles.title}>
                 <Title style={{ margin: 0 }} level={3}>{t("registrationForm:labels:defaults:createAccount")}</Title>
-                <Text>{t("registrationForm:labels:defaults:alreadyHaveAccount")} <Link href="/login">{t("registrationForm:labels:defaults:enter")}</Link></Text>
+                <Text>{t("registrationForm:labels:defaults:alreadyHaveAccount")} <Link
+                    href="/login">{t("registrationForm:labels:defaults:enter")}</Link></Text>
             </div>
             <Text>{t("registrationForm:labels:defaults:weSendCode")}</Text>
             <Form
@@ -49,7 +62,7 @@ export const RegistrationComponent: React.FC = () => {
                     />
                 </Form.Item>
                 <Form.Item>
-                    <Button className={styles.submit} type="primary" htmlType="submit">
+                    <Button loading={registrationSendCodeIsLoading} className={styles.submit} type="primary" htmlType="submit">
                         {t("registrationForm:labels:defaults:further")}
                     </Button>
                 </Form.Item>
