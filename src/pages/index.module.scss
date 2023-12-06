@@ -1,0 +1,8 @@
+@use '@/shared/styles/variables' as variables;
+
+.main {
+  max-width: 1216px;
+  padding-top: variables.$gap-m;
+  margin-left: auto;
+  margin-right: auto;
+}

@@ -1,0 +1,12 @@
+@use '@/shared/styles/variables' as variables;
+
+.header {
+  display: flex;
+  gap: variables.$gap-l;
+  align-items: center;
+}
+
+.menu {
+  display: flex;
+  gap: variables.$gap-m;
+}
