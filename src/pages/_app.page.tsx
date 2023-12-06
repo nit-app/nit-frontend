@@ -28,7 +28,13 @@ function App({ Component, ...props }: NextAppProps<AppProps>) {
             token: {
                 fontSize: 16,
                 fontFamily: "'Inter', sans-serif",
-                lineHeight: 1.5
+                lineHeight: 1.5,
+                controlHeight: 40,
+            },
+            components: {
+                Button: {
+                    borderRadius: 8,
+                }
             }
         }}>
             <>

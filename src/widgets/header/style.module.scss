@@ -2,6 +2,11 @@
 
 .header {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.menuContainer {
+  display: flex;
   gap: variables.$gap-l;
   align-items: center;
 }
@@ -9,4 +14,10 @@
 .menu {
   display: flex;
   gap: variables.$gap-m;
+}
+
+.actionButtons {
+  align-items: center;
+  display: flex;
+  gap: variables.$gap-s;
 }
