@@ -5,8 +5,7 @@ import { getAllEvents } from "@/shared/api/queries";
 
 export function useGetAllEvents() {
     const { query, queryKey } = getAllEvents();
+    const { data, isLoading, isError } = useQuery(queryKey, query);
 
-    const { data = [], isLoading, isError } = useQuery(queryKey, query);
-
-    return { allEvents: data, allEventsLoading: isLoading, allEventsError: isError };
+    return { allEvents: data?.object || [], allEventsLoading: isLoading, allEventsError: isError };
 }

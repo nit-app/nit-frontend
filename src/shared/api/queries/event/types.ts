@@ -1,8 +1,26 @@
 export interface Event {
-    id: string;
+    uuid: string;
     title: string;
-    description: string;
-    date: Date;
+    priceLow: number;
+    priceHigh: number;
+    ageLimitLow: number;
+    ageLimitHigh: number;
+    location: string;
+    ownerInfo: string;
+    hasCertificate: string;
+    favCount: number;
+    createdAt: string;
+    modifiedAt: string;
+    schedule: Schedule[]
+    tags: string[]
+}
+
+
+interface Schedule {
+    scheduleUUID: string;
+    beginsAt: string;
+    endsAt: string;
+    addedAt: string;
 }
 
 export interface EventRequest extends Omit<Event, "id"> {
