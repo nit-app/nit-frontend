@@ -1,0 +1,11 @@
+@use '@/shared/styles/variables' as variables;
+
+.filters {
+  display: flex;
+  justify-content: space-between;
+}
+
+.filterActions {
+  display: flex;
+  gap: variables.$gap-s;
+}
