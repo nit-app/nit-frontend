@@ -11,7 +11,9 @@ import { queryClient } from "@/shared/api/hooks";
 import { startMirage } from "@/other/mirage/config";
 
 
-if (process.env.MODE === "debug") {
+console.log(process.env.Mode);
+if (process.env.NEXT_PUBLIC_MODE === "debug") {
+    console.log("------ DEBUG MODE ------");
     startMirage();
 }
 

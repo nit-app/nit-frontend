@@ -7,7 +7,7 @@ export interface Event {
     ageLimitHigh: number;
     location: string;
     ownerInfo: string;
-    hasCertificate: string;
+    hasCertificate: boolean;
     favCount: number;
     createdAt: string;
     modifiedAt: string;

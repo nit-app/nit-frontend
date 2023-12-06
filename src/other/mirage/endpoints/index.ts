@@ -1,7 +1,7 @@
 import { routesForUsers } from "./user/user";
 import { routesForLogin } from "./login/login";
 import { routesForRegistration } from "./registration/registration";
-import { routesForEvent } from "./event/event";
+import { routesForEvent } from "@/other/mirage/endpoints/events/event";
 
 const endpoints = {
     users: routesForUsers,
