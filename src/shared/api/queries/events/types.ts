@@ -27,8 +27,26 @@ interface Schedule {
 export interface EventRequest extends Omit<Event, "id"> {
 }
 
-export interface GetAllEventsResponse {
-    events: Event[];
+
+/**
+ * Interface for lookup events
+ *
+ * @property from
+ * date ISO format, `new Date().toISOString()`
+ *
+ * ---
+ * @property to
+ * date ISO format, `new Date().toISOString()`
+ *
+ * ---
+ * @property excludeAgeRestricted
+ * exclude 18+ events
+ */
+
+export interface FiltersPayload {
+    from: string;
+    to: string;
+    tags?: string[];
+    excludeAgeRestricted?: boolean;
+    excludePaid?: boolean;
 }
-
-

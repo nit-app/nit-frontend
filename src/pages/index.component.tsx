@@ -1,16 +1,13 @@
-import { useTranslation } from "@/shared/translation";
-import { useGetAllEvents } from "@/shared/api/hooks";
-import { List } from "antd";
-import { Filters, Header } from "@/widgets";
 import * as styles from "./index.module.scss";
+import { useTranslation } from "@/shared/translation";
+import { Filters, Header } from "@/widgets";
 import { Gap } from "@/shared/ui/gap";
-import { EventCard } from "@/entities";
+import { EventList } from "@/widgets/eventList/eventList.component";
+import { defaultFilters } from "@/shared/api/queries";
 
 
 export function Index() {
     const { t } = useTranslation();
-    const { allEvents, allEventsLoading, allEventsError } = useGetAllEvents();
-    const allEventsLoaded = !allEventsLoading && !allEventsError;
     return (
         <>
             <main className={styles.main}>
@@ -18,13 +15,7 @@ export function Index() {
                 <Gap size="m"/>
                 <Filters/>
                 <Gap size="m"/>
-                <List loading={allEventsLoading}>
-                    <div className={styles.eventContainer}>
-                        {
-                            allEventsLoaded && allEvents.map((event) => <EventCard event={event} key={event.uuid}/>)
-                        }
-                    </div>
-                </List>
+                <EventList title='Все' filters={defaultFilters()}/>
             </main>
         </>
     );

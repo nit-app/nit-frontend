@@ -1,0 +1,8 @@
+@use '@/shared/styles/variables' as v;
+
+.eventContainer {
+  display: flex;
+  justify-content: flex-start;
+  gap: v.$size-l;
+  flex-wrap: wrap;
+}

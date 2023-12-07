@@ -1,2 +1,2 @@
 export { usePostCreateEvent } from "./useCreateEvent.post";
-export { useGetAllEvents } from "./useAllEvents.get";
+export { useLookupEvents } from "./useAllEvents.get";

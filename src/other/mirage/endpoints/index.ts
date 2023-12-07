@@ -7,7 +7,7 @@ const endpoints = {
     users: routesForUsers,
     login: routesForLogin,
     registration: routesForRegistration,
-    event: routesForEvent,
+    events: routesForEvent,
 };
 
 export { endpoints };

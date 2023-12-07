@@ -1,5 +1,5 @@
 import * as styles from "./eventCard.module.scss";
-import { Event } from "@/shared/api/queries/event/types";
+import { Event } from "@/shared/api/queries/events/types";
 import { Typography } from "@/shared/ui/typography";
 import { UserOutlined } from "@ant-design/icons";
 import { Tag } from "antd";

@@ -1,5 +1,5 @@
 import { Factory } from "miragejs";
-import { Event } from "@/shared/api/queries/event/types";
+import { Event } from "@/shared/api/queries/events/types";
 import { faker } from "@faker-js/faker";
 
 faker.seed(1);
