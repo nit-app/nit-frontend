@@ -1,16 +1,16 @@
-@use '@/shared/styles/variables' as variables;
+@use '@/shared/styles/variables' as v;
 
 
 .gap {
   &[data-size=s] {
-    height: variables.$gap-s
+    height: v.$size-s
   }
 
   &[data-size=m] {
-    height: variables.$gap-m
+    height: v.$size-m
   }
 
   &[data-size=l] {
-    height: variables.$gap-l
+    height: v.$size-l
   }
 }

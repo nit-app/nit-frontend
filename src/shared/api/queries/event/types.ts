@@ -11,8 +11,9 @@ export interface Event {
     favCount: number;
     createdAt: string;
     modifiedAt: string;
-    schedule: Schedule[]
-    tags: string[]
+    schedule: Schedule[];
+    tags: string[];
+    description: string;
 }
 
 

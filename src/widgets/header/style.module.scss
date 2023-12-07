@@ -1,4 +1,4 @@
-@use '@/shared/styles/variables' as variables;
+@use '@/shared/styles/variables' as v;
 
 .header {
   display: flex;
@@ -7,17 +7,17 @@
 }
 .menuContainer {
   display: flex;
-  gap: variables.$gap-l;
+  gap: v.$size-l;
   align-items: center;
 }
 
 .menu {
   display: flex;
-  gap: variables.$gap-m;
+  gap: v.$size-m;
 }
 
 .actionButtons {
   align-items: center;
   display: flex;
-  gap: variables.$gap-s;
+  gap: v.$size-s;
 }

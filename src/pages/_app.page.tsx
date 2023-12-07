@@ -12,7 +12,6 @@ import { startMirage } from "@/other/mirage/config";
 import { ConfigProvider } from "antd";
 
 
-console.log(process.env.Mode);
 if (process.env.NEXT_PUBLIC_MODE === "debug") {
     console.log("------ DEBUG MODE ------");
     startMirage();
@@ -30,10 +29,34 @@ function App({ Component, ...props }: NextAppProps<AppProps>) {
                 fontFamily: "'Inter', sans-serif",
                 lineHeight: 1.5,
                 controlHeight: 40,
+                colorPrimary: "#1677ff",
+                colorFillSecondary: "#a2c9ff",
+                colorPrimaryBg: "#e8f1ff",
+                colorPrimaryBorder: "#e8f1ff",
+                colorPrimaryHover: "#005de0",
+                // colorhover: "#0048ad",
+                colorPrimaryBgHover: "#00337a",
+                colorPrimaryText: "#011127",
+                colorTextSecondary: "#808893",
+                colorIcon: "#cccfd4",
+                colorBorder: "#e8f1ff",
+                colorBgBase: "#e8f1ff",
+                colorSuccess: "#30db32",
+                colorSuccessBg: "#c1f4c2",
+                colorWarning: "#fccc2d",
+                colorWarningBg: "#fef0c0",
+                colorError: "#ef3c29",
+                colorErrorBg: "#fac5bf",
             },
             components: {
                 Button: {
                     borderRadius: 8,
+                },
+                Typography: {
+                    titleMarginBottom: 0,
+                    titleMarginTop: 0,
+                    margin: 0,
+                    fontSizeHeading4: 18,
                 }
             }
         }}>

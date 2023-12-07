@@ -2,12 +2,14 @@ import { Factory } from "miragejs";
 import { Event } from "@/shared/api/queries/event/types";
 import { faker } from "@faker-js/faker";
 
+faker.seed(1);
+
 export const eventFactory = Factory.extend<Event>({
     uuid() {
         return faker.string.uuid();
     },
     title() {
-        return faker.word.words(1);
+        return faker.word.words(10);
     },
     priceLow() {
         return faker.number.int({ min: 100, max: 2000 });
@@ -24,7 +26,9 @@ export const eventFactory = Factory.extend<Event>({
     },
     location() {
         return faker.helpers.arrayElement([
-            "56.822523, 60.605641 улица Декабристов, 77Б, Екатеринбург, Свердловская область, 620063"
+            "Екатеринбург, Россия ул. Куйбышева, д. 44",
+            "Екатеринбург, Россия",
+            "Екатеринбург, Россия г. Екатеринбург, ул. Бориса Ельцина, 8"
         ]);
     },
     ownerInfo() {
@@ -56,9 +60,10 @@ export const eventFactory = Factory.extend<Event>({
         ];
     },
     tags() {
-        return faker.helpers.arrayElements(new Array(faker.number.int({
-            min: 1,
-            max: 10
-        })).map(() => faker.word.words(1)));
+        const nouns = new Array(100).fill(0).map(() => faker.word.noun(1));
+        return faker.helpers.arrayElements(nouns, { min: 0, max: 15 });
+    },
+    description() {
+        return faker.word.words({ count: faker.number.int({ min: 30, max: 100 }) });
     }
 });

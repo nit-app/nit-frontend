@@ -1,6 +1,6 @@
-export type BaseResponse<T> = {
+export type BaseResponse<Object> = {
     timestamp: string;
-    object: T;
+    object: Object;
     status: number;
 }
 

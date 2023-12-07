@@ -1,0 +1,95 @@
+@use '@/shared/styles/variables' as v;
+
+.eventCard {
+  $gap-size: (2 * (v.$size-xl));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: calc(min(1216px, 90vw) / 3 - $gap-size);
+  height: calc(min(1216px, 90vw) / 3 - $gap-size);
+  aspect-ratio: 1 / 1;
+  background-color: v.$color-primary-bg;
+  padding: v.$size-l;
+  border-radius: v.$size-s;
+}
+
+.eventHeaderContainer {
+  display: flex;
+  flex-direction: column;
+  gap: v.$size-s;
+}
+
+.eventCardHeaderRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+
+  h4 {
+    max-width: 82%;
+    flex-basis: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    margin: 0;
+  }
+
+  span {
+    flex-basis: max-content;
+    word-break: keep-all;
+  }
+}
+
+.eventDateAndLocationContainer {
+  display: flex;
+  flex-direction: column;
+  gap: v.$size-xs;
+
+  .eventDateRow {
+
+  }
+
+  .eventLocationRow {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
+.eventFavCountRow {
+  margin-bottom: v.$size-m;
+  width: max-content;
+  display: flex;
+  align-items: center;
+  gap: v.$size-xxs;
+}
+
+.eventDescriptionContainer {
+  align-self: stretch;
+  overflow: hidden;
+  text-overflow: clip;
+  flex: 1;
+  word-break: break-word;
+  & > * {
+    height: 100%;
+  }
+}
+
+.eventTagsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: v.$size-xs;
+  max-height: 2.5 * v.$size-l;
+  height: max-content;
+  overflow: hidden;
+  // bad hack for description text overflow fix
+  margin-top: 5px;
+
+  & > * {
+    padding-top: v.$size-xxs;
+    padding-bottom: v.$size-xxs;
+    margin: 0;
+  }
+}
