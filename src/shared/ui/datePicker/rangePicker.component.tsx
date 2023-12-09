@@ -1,9 +1,7 @@
 import { ConfigProvider, DatePicker as AntdDatePicker } from "antd";
 import locale from "antd/locale/ru_RU";
-import CalendarLocale from "rc-picker/lib/locale/ru_RU";
 
 export function RangePicker(props: typeof AntdDatePicker.RangePicker["propTypes"]) {
-    console.log(locale, CalendarLocale);
     return (
         <ConfigProvider
             theme={{
