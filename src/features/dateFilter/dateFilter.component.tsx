@@ -29,6 +29,7 @@ export function DateFilter(props: DateFilterProps) {
     return (
         <div className={styles.datePickerContainer}>
             <DatePicker.RangePicker
+
                 value={[dayjs(props.from), dayjs(props.to)]}
                 open={isOpen}
                 onChange={onChange}
