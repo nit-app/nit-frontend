@@ -1,10 +1,10 @@
 import { CalendarOutlined } from "@ant-design/icons";
-import { ConfigProvider, DatePicker } from "antd";
-
+import { DatePicker } from "@/shared/ui/datePicker";
 import { Button } from "@/shared/ui/button";
-import * as styles from "./dateFilter.module.scss";
 import { useState } from "react";
 import dayjs, { Dayjs } from "dayjs";
+import * as styles from "./dateFilter.module.scss";
+import { Namespace, useTranslation } from "@/shared/translation";
 
 interface DateFilterProps {
     from: string;
@@ -14,6 +14,8 @@ interface DateFilterProps {
 
 export function DateFilter(props: DateFilterProps) {
     const [isOpen, setIsOpen] = useState<boolean>(false);
+
+    const { t } = useTranslation(Namespace.content);
 
     function onClick() {
         setIsOpen(s => !s);
@@ -26,20 +28,12 @@ export function DateFilter(props: DateFilterProps) {
 
     return (
         <div className={styles.datePickerContainer}>
-            <ConfigProvider theme={{
-                components: {
-                    DatePicker: {
-                        cellActiveWithRangeBg: "#a2c9ff"
-                    }
-                }
-            }}>
-                <DatePicker.RangePicker
-                    value={[dayjs(props.from), dayjs(props.to)]}
-                    open={isOpen}
-                    onChange={onChange}
-                    className={styles.ghostDatePicker}/>
-                <Button onClick={onClick}>Дата<CalendarOutlined/></Button>
-            </ConfigProvider>
+            <DatePicker.RangePicker
+                value={[dayjs(props.from), dayjs(props.to)]}
+                open={isOpen}
+                onChange={onChange}
+                className={styles.ghostDatePicker}/>
+            <Button onClick={onClick}>{t("filters:date")}<CalendarOutlined/></Button>
         </div>
     );
 }

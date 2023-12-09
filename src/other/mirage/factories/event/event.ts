@@ -2,7 +2,7 @@ import { Factory } from "miragejs";
 import { Event } from "@/shared/api/queries/events/types";
 import { faker } from "@faker-js/faker";
 
-faker.seed(1);
+faker.seed(15);
 
 export const eventFactory = Factory.extend<Event>({
     uuid() {
@@ -51,11 +51,12 @@ export const eventFactory = Factory.extend<Event>({
             {
                 scheduleUUID: faker.string.uuid(),
                 beginsAt: faker.date.between({
-                    from: Number(new Date() - 1000* 60 * 60 * 24 * 15),
-                    to: Number(new Date()) + 1000* 60 * 60 * 24 * 30 }).toString(),
+                    from: Number(new Date() - 1000 * 60 * 60 * 24 * 5),
+                    to: Number(new Date()) + 1000 * 60 * 60 * 24 * 15
+                }).toString(),
                 endsAt: faker.date.between({
-                    from: Number(new Date()) + 10 ** 6,
-                    to: Number(new Date()) + 10 ** 10
+                    from: Number(new Date()) + 1000 * 60 * 60 * 24 * 15,
+                    to: Number(new Date()) + 1000* 60 * 60 * 24 * 17
                 }).toString(),
                 addedAt: ""
             }

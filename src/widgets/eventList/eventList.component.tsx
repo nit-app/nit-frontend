@@ -4,8 +4,7 @@ import { List } from "antd";
 import { useLookupEvents } from "@/shared/api/hooks";
 import { FiltersPayload } from "@/shared/api/queries/events/types";
 import { Typography } from "@/shared/ui/typography";
-import { Gap } from "@/shared/ui/gap";
-import { ArrowRightOutlined } from "@ant-design/icons";
+import { Namespace, useTranslation } from "@/shared/translation";
 
 const { Title, Link } = Typography;
 
@@ -16,13 +15,14 @@ interface EventListProps {
 }
 
 export function EventList({ title, filters, link }: EventListProps) {
+    const { t } = useTranslation(Namespace.content);
     const { events, isEventsLoading } = useLookupEvents(filters);
 
     return (
         <div className={styles.listContainer}>
             <div className={styles.headerContainer}>
                 <Title>{title}</Title>
-                <Link type="text" href={link} className={styles.seeAll}>Смотреть все →</Link>
+                <Link type="text" href={link} className={styles.seeAll}>{t("eventList:seeAll")}</Link>
             </div>
             <List loading={isEventsLoading}>
                 <div className={styles.eventContainer}>

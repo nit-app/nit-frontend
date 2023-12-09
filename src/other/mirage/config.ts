@@ -10,7 +10,7 @@ export function startMirage() {
         factories,
         seeds(server) {
             server.createList("user", faker.number.int({ min: 10, max: 25 }));
-            server.createList("event", faker.number.int({ min: 50, max: 100 }));
+            server.createList("event", faker.number.int({ min: 80, max: 100 }));
         },
     });
     server.logging = true;

@@ -1,6 +1,6 @@
 import { Server, Response } from "miragejs";
 import { faker } from "@faker-js/faker";
-import { FiltersPayload, Event } from "@/shared/api/queries/events/types";
+import { FiltersPayload } from "@/shared/api/queries/events/types";
 
 export function routesForEvent(server: Server) {
     server.post("/events/lookup", async (schema, { requestBody }) => {
@@ -8,7 +8,7 @@ export function routesForEvent(server: Server) {
         let events = schema.where("event", event => {
             return (
                 (Number(new Date(event.schedule[0].beginsAt)) >= Number(new Date(body.from))) &&
-                (Number(new Date(event.schedule[0].endsAt)) <= Number(new Date(body.to)))
+                (Number(new Date(event.schedule[0].beginsAt)) <= Number(new Date(body.to)))
             );
 
         }).sort((a, b) => Number(new Date(a.schedule[0].beginsAt)) - Number(new Date(b.schedule[0].beginsAt)));

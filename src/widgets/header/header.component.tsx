@@ -20,8 +20,8 @@ export function Header() {
                 </li>
             </div>
             <div className={styles.actionButtons}>
-                <Button type="primary">{t("header:login")}</Button>
-                <Button ghost type="primary">{t("header:register")}</Button>
+                <Button href='/login' type="primary">{t("header:login")}</Button>
+                <Button href='/registration' ghost type="primary">{t("header:register")}</Button>
             </div>
         </div>
     );
