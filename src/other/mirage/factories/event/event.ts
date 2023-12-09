@@ -50,7 +50,9 @@ export const eventFactory = Factory.extend<Event>({
         return [
             {
                 scheduleUUID: faker.string.uuid(),
-                beginsAt: faker.date.between({ from: new Date(), to: Number(new Date()) + 10 ** 6 }).toString(),
+                beginsAt: faker.date.between({
+                    from: Number(new Date() - 1000* 60 * 60 * 24 * 15),
+                    to: Number(new Date()) + 1000* 60 * 60 * 24 * 30 }).toString(),
                 endsAt: faker.date.between({
                     from: Number(new Date()) + 10 ** 6,
                     to: Number(new Date()) + 10 ** 10

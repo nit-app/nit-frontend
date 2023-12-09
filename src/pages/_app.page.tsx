@@ -1,4 +1,4 @@
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import type { AppProps as NextAppProps } from "next/app";
 import Head from "next/head";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -22,6 +22,23 @@ function App({ Component, ...props }: NextAppProps<AppProps>) {
     const { t } = useTranslation();
     const meta = pageProps.meta?.tags || [];
     const title = pageProps.meta?.title || t(key(Namespace.service, "title"));
+    return (
+        <ThemeConfig>
+            <Head>
+                <meta charSet="utf-8"/>
+                {...DefaultTags}
+                {meta && meta.map(prop => <meta {...prop} key={prop.key}/>)}
+                <title key="title">{title}</title>
+            </Head>
+
+            <QueryClientProvider client={queryClient}>
+                <Component {...pageProps} />
+            </QueryClientProvider>
+        </ThemeConfig>
+    );
+}
+
+function ThemeConfig(props: PropsWithChildren) {
     return (
         <ConfigProvider theme={{
             token: {
@@ -51,27 +68,20 @@ function App({ Component, ...props }: NextAppProps<AppProps>) {
             components: {
                 Button: {
                     borderRadius: 8,
+                    lineWidth: 2,
                 },
                 Typography: {
                     titleMarginBottom: 0,
                     titleMarginTop: 0,
                     margin: 0,
                     fontSizeHeading4: 18,
+                },
+                Input: {
+                    lineWidth: 2,
                 }
             }
         }}>
-            <>
-                <Head>
-                    <meta charSet="utf-8"/>
-                    {...DefaultTags}
-                    {meta && meta.map(prop => <meta {...prop} key={prop.key}/>)}
-                    <title key="title">{title}</title>
-                </Head>
-
-                <QueryClientProvider client={queryClient}>
-                    <Component {...pageProps} />
-                </QueryClientProvider>
-            </>
+            {props.children}
         </ConfigProvider>
     );
 }

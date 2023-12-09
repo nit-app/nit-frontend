@@ -4,18 +4,28 @@ import { Filters, Header } from "@/widgets";
 import { Gap } from "@/shared/ui/gap";
 import { EventList } from "@/widgets/eventList/eventList.component";
 import { defaultFilters } from "@/shared/api/queries";
+import { useState } from "react";
+import { Property } from "csstype";
+import { FiltersPayload } from "@/shared/api/queries/events/types";
 
 
 export function Index() {
-    const { t } = useTranslation();
+    const [filters, setFilters] = useState({ all: defaultFilters() });
+
+    function filtersSetter(name: string) {
+        return (filters: FiltersPayload) => {
+            setFilters(prev => ({ ...prev, [name]: filters }));
+        };
+    }
+
     return (
         <>
             <main className={styles.main}>
                 <Header/>
                 <Gap size="m"/>
-                <Filters/>
+                <Filters filters={filters["all"]} setFilters={filtersSetter("all")}/>
                 <Gap size="m"/>
-                <EventList title='Все' filters={defaultFilters()}/>
+                <EventList link="#" title="Все" filters={filters["all"]}/>
             </main>
         </>
     );

@@ -1,16 +1,18 @@
 @use '@/shared/styles/variables' as v;
 
 .eventCard {
-  $gap-size: (2 * (v.$size-xl));
+  $gap-size: (1 * (v.$size-l));
+  $content-width-l: v.$content-width-l;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: calc(min(1216px, 90vw) / 3 - $gap-size);
-  height: calc(min(1216px, 90vw) / 3 - $gap-size);
+  width: calc((min($content-width-l, 90vw) - $gap-size) / 2);
+  height: calc((min($content-width-l, 90vw) - $gap-size) / 2);
   aspect-ratio: 1 / 1;
   background-color: v.$color-primary-bg;
   padding: v.$size-l;
   border-radius: v.$size-s;
+  box-sizing: border-box;
 }
 
 .eventHeaderContainer {
@@ -72,6 +74,7 @@
   text-overflow: clip;
   flex: 1;
   word-break: break-word;
+
   & > * {
     height: 100%;
   }

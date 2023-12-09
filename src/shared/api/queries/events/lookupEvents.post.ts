@@ -4,7 +4,10 @@ import { Event, FiltersPayload } from "./types";
 import { AxiosResponse } from "axios";
 
 // from this moment to the biggest date
-export const defaultFilters = () => ({ from: (new Date()).toISOString(), to: "+275760-09-13T00:00:00.000Z" });
+export const defaultFilters = () => ({
+    from: (new Date()).toISOString(),
+    // one week
+    to: (new Date(Number(new Date()) + 1000 * 60 * 60 * 24 * 7)).toISOString() });
 
 export function lookupEvents(filters: FiltersPayload = defaultFilters()) {
     const query = () => instance
@@ -14,7 +17,7 @@ export function lookupEvents(filters: FiltersPayload = defaultFilters()) {
             FiltersPayload
         >("/events/lookup", filters)
         .then(response => response.data);
-    const queryKey = ["event", "all"];
+    const queryKey = ["events", filters.from, filters.to];
 
     return { query, queryKey };
 }
