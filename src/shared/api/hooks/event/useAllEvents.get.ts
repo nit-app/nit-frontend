@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { getAllEvents } from "@/shared/api/queries";
+import { lookupEvents } from "@/shared/api/queries";
+import { FiltersPayload } from "@/shared/api/queries/events/types";
 
 
-export function useGetAllEvents() {
-    const { query, queryKey } = getAllEvents();
+export function useLookupEvents(filters: FiltersPayload) {
+    const { query, queryKey } = lookupEvents(filters);
+    const { data, isLoading, isError } = useQuery(queryKey, query);
 
-    const { data = [], isLoading, isError } = useQuery(queryKey, query);
-
-    return { allEvents: data, allEventsLoading: isLoading, allEventsError: isError };
+    return { events: data?.object || [], isEventsLoading: isLoading, isEventsError: isError };
 }

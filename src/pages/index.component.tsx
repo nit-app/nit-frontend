@@ -1,26 +1,29 @@
-import { useTranslation, key, Namespace } from "@/shared/translation";
-import { useGetAllEvents } from "@/shared/api/hooks";
-import { List, Typography } from "antd";
-import { Event } from "@/other/mirage/types";
+import * as styles from "./index.module.scss";
+import { Filters, Header } from "@/widgets";
+import { Gap } from "@/shared/ui/gap";
+import { EventList } from "@/widgets/eventList/eventList.component";
+import { defaultFilters } from "@/shared/api/queries";
+import { useState } from "react";
+import { FiltersPayload } from "@/shared/api/queries/events/types";
 
-const { Text, Title } = Typography;
 
 export function Index() {
-    const { t } = useTranslation();
-    const { allEvents, allEventsLoading, allEventsError } = useGetAllEvents();
-    const allHelloLoaded = !allEventsLoading && !allEventsError;
+    const [filters, setFilters] = useState({ all: defaultFilters() });
+
+    function filtersSetter(name: string) {
+        return (filters: FiltersPayload) => {
+            setFilters(prev => ({ ...prev, [name]: filters }));
+        };
+    }
+
     return (
         <>
-            <main>
-                <Title>{t(key(Namespace.content, "event"), ".")}</Title>
-                <List loading={allEventsLoading}>
-                    {
-                        allHelloLoaded && allEvents.map((event: Event) => (
-                                <List.Item key={event.id}><Text>{event.title}</Text></List.Item>
-                            )
-                        )
-                    }
-                </List>
+            <main className={styles.main}>
+                <Header/>
+                <Gap size="m"/>
+                <Filters filters={filters["all"]} setFilters={filtersSetter("all")}/>
+                <Gap size="m"/>
+                <EventList link="#" title="На этой неделе" filters={filters["all"]}/>
             </main>
         </>
     );

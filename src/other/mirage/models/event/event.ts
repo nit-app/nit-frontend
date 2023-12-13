@@ -1,6 +1,5 @@
 // eslint-disable-next-line import/no-unresolved
-import { ModelDefinition } from "miragejs/-types";
 import { Model } from "miragejs";
-import { Event } from "../../types";
+import { Event } from "@/shared/api/queries/events/types";
 
-export const EventModel: ModelDefinition<Event> = Model.extend({});
+export const EventModel = Model.extend<Event>({} as any);

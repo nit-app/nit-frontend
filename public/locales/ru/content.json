@@ -87,5 +87,19 @@
       "c": "секундами",
       "p": "секундах"
     }
+  },
+  "header": {
+    "forOrganizations": "Для организаторов",
+    "aboutService": "О сервисе",
+    "login": "Войти",
+    "register": "Регистрация"
+  },
+  "filters": {
+    "date": "Дата",
+    "tags": "Теги",
+    "searchPlaceholder": "Найти"
+  },
+  "eventList": {
+    "seeAll": "Смотреть все →"
   }
 }

@@ -24,7 +24,8 @@
     },
     "typeRoots": [
       "src/shared/types",
-      "node_modules/@types"
+      "node_modules/@types",
+      "declarations.d.ts"
     ],
     "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },

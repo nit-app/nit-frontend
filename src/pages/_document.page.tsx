@@ -4,6 +4,9 @@ import { createCache, extractStyle, StyleProvider } from "@ant-design/cssinjs";
 function _Document() {
     return (
         <Html lang="ru">
+            <link rel="preconnect" href="https://fonts.googleapis.com"/>
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin/>
+            <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet"/>
             <Head/>
             <body>
             <Main/>
@@ -32,7 +35,7 @@ _Document.getInitialProps = async (ctx: DocumentContext) => {
         styles: (
             <>
                 {initialProps.styles}
-                <style dangerouslySetInnerHTML={{ __html: style }} />
+                <style dangerouslySetInnerHTML={{ __html: style }}/>
             </>
         ),
     };

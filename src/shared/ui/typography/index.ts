@@ -1,3 +1,5 @@
 import { Typography as AntdTypography } from "antd";
 
-export const Typography = AntdTypography;
+import { Link } from "./link";
+
+export const Typography = { ...AntdTypography, Link };

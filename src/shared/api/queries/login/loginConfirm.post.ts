@@ -1,6 +1,6 @@
 import instance from "@/shared/api";
-import { BaseConfirmCodeRequest, BaseRespnonse } from "@/shared/api/queries/types";
+import { BaseConfirmCodeRequest, BaseResponse } from "@/shared/api/queries/types";
 
 export function loginConfirm(code: string) {
-    return instance.post<BaseConfirmCodeRequest, BaseRespnonse>("auth/confirm", { code: code });
+    return instance.post<BaseConfirmCodeRequest, BaseResponse<boolean>>("auth/confirm", { code: code });
 }

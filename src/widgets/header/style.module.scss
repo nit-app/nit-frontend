@@ -1,0 +1,28 @@
+@use '@/shared/styles/variables' as v;
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.menuContainer {
+  display: flex;
+  gap: v.$size-l;
+  align-items: center;
+}
+
+.menu {
+  display: flex;
+  gap: v.$size-m;
+
+  & > ul {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.actionButtons {
+  align-items: center;
+  display: flex;
+  gap: v.$size-s;
+}
