@@ -1,24 +1,39 @@
 {
   "name": "nit-app",
-  "version": "0.1.0",
+  "version": "0.9.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "nodemon --watch public --exec \"next dev\"",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@ant-design/cssinjs": "^1.17.0",
+    "@tanstack/react-query": "^4.35.3",
+    "@typescript-eslint/eslint-plugin": "^6.7.3",
+    "@typescript-eslint/parser": "^6.7.3",
+    "antd": "^5.9.4",
+    "axios": "^1.5.1",
+    "eslint-plugin-import": "^2.28.1",
+    "i18next": "^23.5.1",
+    "next": "latest",
+    "next-i18next": "^14.0.3",
     "react": "latest",
     "react-dom": "latest",
-    "next": "latest"
+    "react-i18next": "^13.2.2"
   },
   "devDependencies": {
-    "typescript": "latest",
-    "@types/react": "latest",
+    "typescript-plugin-css-modules": "^5.0.2",
+    "@faker-js/faker": "^8.1.0",
     "@types/node": "latest",
+    "@types/react": "latest",
     "@types/react-dom": "latest",
     "eslint": "latest",
-    "eslint-config-next": "latest"
+    "eslint-config-next": "^13.5.3",
+    "miragejs": "^0.1.47",
+    "nodemon": "^3.0.1",
+    "sass": "^1.69.4",
+    "typescript": "latest"
   }
 }

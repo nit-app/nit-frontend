@@ -1,0 +1,105 @@
+{
+  "hello": "Привет, nIT!",
+  "enterCodeForm": {
+    "labels": {
+      "defaults": {
+        "sendCode": "Отправили код подтверждения на номер {{phone}}",
+        "enterCode": "Введите код",
+        "sendAgain": "Отправить ещё раз",
+        "sendAgainPerSeconds": "Отправим код повторно через",
+        "seconds": "секунд"
+      }
+    }
+  },
+  "forms": {
+    "labels": {
+      "defaults": {
+        "pleaseEnterCode": "Пожалуйста введите код"
+      }
+    }
+  },
+  "finishRegistrationForm": {
+    "labels": {
+      "defaults": {
+        "enterYourData": "Введите свои данные",
+        "enterYourName": "Введите Ваше имя",
+        "enterYourSurname": "Введите Вашу фамилию",
+        "createAccount": "Создать аккаунт"
+      }
+    },
+    "placeholders": {
+      "defaults": {
+        "name": "Имя",
+        "surname": "Фамилия"
+      }
+    }
+  },
+  "registrationForm": {
+    "labels": {
+      "defaults": {
+        "alreadyHaveAccount": "Уже есть аккаунт?",
+        "weSendCode": "Мы отправим код подтверждения",
+        "createAccount": "Создать аккаунт",
+        "enter": "Войти",
+        "further": "Получить код"
+      }
+    },
+    "placeholders": {
+      "defaults": {
+        "phone": "Телефон"
+      }
+    }
+  },
+  "loginForm": {
+    "labels": {
+      "defaults": {
+        "enter": "Войти",
+        "firstTime": "Впервые тут? ",
+        "loginAccount": "Вход в акаунт",
+        "weSendCode": "Мы отправим код подтверждения",
+        "further": "Далее",
+        "createAccount": "Создать аккаунт"
+      }
+    },
+    "placeholders": {
+      "defaults": {
+        "name": "Имя",
+        "surname": "Фамилия",
+        "password": "Пароль",
+        "phone": "Телефон"
+      }
+    }
+  },
+  "declensions": {
+    "second": {
+      "n": "секунда",
+      "g": "секунды",
+      "d": "секунде",
+      "a": "секунду",
+      "c": "секундой",
+      "p": "секунде"
+    },
+    "seconds": {
+      "n": "секунды",
+      "g": "секунд",
+      "d": "секундам",
+      "a": "секунды",
+      "c": "секундами",
+      "p": "секундах"
+    }
+  },
+  "header": {
+    "forOrganizations": "Для организаторов",
+    "aboutService": "О сервисе",
+    "login": "Войти",
+    "register": "Регистрация"
+  },
+  "filters": {
+    "date": "Дата",
+    "tags": "Теги",
+    "searchPlaceholder": "Найти"
+  },
+  "eventList": {
+    "seeAll": "Смотреть все →"
+  }
+}
