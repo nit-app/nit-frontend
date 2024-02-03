@@ -1,6 +1,7 @@
 @use '@/shared/styles/variables' as v;
 
 .eventCard {
+  position: relative;
   $gap-size: (1 * (v.$size-l));
   $content-width-l: v.$content-width-l;
   display: flex;
@@ -38,6 +39,17 @@
   display: flex;
   flex-direction: column;
   gap: v.$size-s;
+}
+
+.eventLink {
+  position: absolute;
+  color: transparent;
+  background-color: transparent;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .eventCardHeaderRow {

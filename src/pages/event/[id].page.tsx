@@ -1,17 +1,17 @@
 import styles from "./event.module.scss";
+import { Spin, Tag } from "antd";
+
 import { Header } from "@/widgets";
-import { Gap } from "@/shared/ui/gap";
+import { Gap, Typography } from "@/shared/ui";
 import { ssrTranslation } from "@/shared/translation/ssrTranslation";
 import { GetServerSidePropsContext } from "next";
 import { useLookupEvent } from "@/shared/api/hooks";
-import { Spin, Tag } from "antd";
-import { Typography } from "@/shared/ui/typography";
 
 
 const { Title, Text } = Typography;
 export default function Event(props: { id: string }) {
     const { event, isEventLoading } = useLookupEvent(props.id);
-    if (!event) return (
+    if (isEventLoading) return (
         <main className={styles.main}>
             <Header/>
             <Gap size="m"/>

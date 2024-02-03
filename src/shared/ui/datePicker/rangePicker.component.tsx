@@ -1,7 +1,10 @@
 import { ConfigProvider, DatePicker as AntdDatePicker } from "antd";
 import locale from "antd/locale/ru_RU";
+import { ForwardedRef, forwardRef } from "react";
 
-export function RangePicker(props: typeof AntdDatePicker.RangePicker["propTypes"]) {
+export const RangePicker = forwardRef(RangePickerInner);
+
+export function RangePickerInner(props: typeof AntdDatePicker.RangePicker["propTypes"], ref: ForwardedRef<string>) {
     return (
         <ConfigProvider
             theme={{
@@ -12,6 +15,8 @@ export function RangePicker(props: typeof AntdDatePicker.RangePicker["propTypes"
                 }
             }}>
             <AntdDatePicker.RangePicker
+                ref={ref}
+
                 locale={{
                     ...locale.DatePicker,
                     lang: {
