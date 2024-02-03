@@ -3,7 +3,10 @@
 .header {
   display: flex;
   justify-content: space-between;
+  $content-width-l: v.$content-width-l;
   align-items: center;
+  width: min($content-width-l, 94vw);
+
 }
 .menuContainer {
   display: flex;

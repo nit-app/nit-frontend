@@ -6,8 +6,8 @@ import { AxiosResponse } from "axios";
 // from this moment to the biggest date
 export const defaultFilters = () => ({
     from: (new Date()).toISOString(),
-    // one week
-    to: (new Date(Number(new Date()) + 1000 * 60 * 60 * 24 * 7)).toISOString() });
+    // 40 days
+    to: (new Date(Number(new Date()) + 1000 * 60 * 60 * 24 * 40)).toISOString() });
 
 export function lookupEvents(filters: FiltersPayload = defaultFilters()) {
     const query = () => instance
@@ -17,7 +17,9 @@ export function lookupEvents(filters: FiltersPayload = defaultFilters()) {
             FiltersPayload
         >("/events/lookup", filters)
         .then(response => response.data);
-    const queryKey = ["events", filters.from, filters.to];
+    const queryKey = ["events", filters.from, filters.to, (filters.tags ?? []).join(";")];
 
     return { query, queryKey };
 }
+
+

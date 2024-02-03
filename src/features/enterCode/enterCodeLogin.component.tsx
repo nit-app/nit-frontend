@@ -7,7 +7,9 @@ export const EnterCodeLoginComponent = () => {
     const { loginConfirm, loginConfirmIsLoading } = useLoginConfirm();
     const onSubmit = async (code: string) => {
         return loginConfirm(code)
-            .then(() => router.push("/"))
+            .then(() => {
+                window.location = "/";
+            })
             .catch(e => e);
     };
     return <EnterCodeBasicComponent loading={loginConfirmIsLoading} onSubmit={onSubmit} path="login"/>;

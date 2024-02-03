@@ -14,6 +14,25 @@
   border-radius: v.$size-s;
   box-sizing: border-box;
 }
+@media screen and (max-width: 1px) {
+  .eventCard {
+    $content-width-l: v.$content-width-l;
+    $gap-size: (1 * (v.$size-l));
+
+    width: calc((min($content-width-l, 60vw) - $gap-size));
+    height: calc((min($content-width-l, 60vw) - $gap-size));
+  }
+}
+@media screen and (max-width: 600px) {
+  .eventCard {
+    $content-width-l: v.$content-width-l;
+    $gap-size: (1 * (v.$size-l));
+
+    width: calc((min($content-width-l, 94vw) - $gap-size));
+    height: calc((min($content-width-l, 94vw) - $gap-size));
+  }
+}
+
 
 .eventHeaderContainer {
   display: flex;

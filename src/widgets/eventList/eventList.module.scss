@@ -10,7 +10,8 @@
 .listContainer {
   display: flex;
   flex-direction: column;
-  gap: v.$size-m
+  gap: v.$size-m;
+  padding-bottom: v.$size-m;
 }
 
 .headerContainer {

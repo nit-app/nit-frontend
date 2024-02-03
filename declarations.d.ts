@@ -1,9 +1,15 @@
 declare module "*.module.css" {
-    const classes: { [key: string]: string };
-    export default classes;
+    interface IClasses {
+        [classes: string]: string
+    }
+    const classes: IClasses;
+    export = classes;
 }
 
 declare module "*.module.scss" {
-    const classes: { [key: string]: string };
-    export default classes;
+    interface IClasses {
+        [classes: string]: string
+    }
+    const classes: IClasses;
+    export = classes;
 }

@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { lookupEvents } from "@/shared/api/queries";
-import { FiltersPayload } from "@/shared/api/queries/events/types";
+import { FiltersPayload, lookupEvents } from "@/shared/api/queries";
 
 
 export function useLookupEvents(filters: FiltersPayload) {
@@ -10,3 +9,7 @@ export function useLookupEvents(filters: FiltersPayload) {
 
     return { events: data?.object || [], isEventsLoading: isLoading, isEventsError: isError };
 }
+
+
+
+

@@ -23,7 +23,9 @@ export const FinishRegistrationComponent = () => {
     const onFinish = (values: FinishRegistrationFieldType) => {
         if (registrationFinishIsLoading) return;
         registrationFinish(values)
-            .then(() => router.push("/"))
+            .then(() => {
+                window.location = "/";
+            })
             .catch(e => console.log(e)); //for testing in debug mode
     };
     return (

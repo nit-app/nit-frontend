@@ -5,7 +5,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 
 import { DefaultTags } from "@/shared/seo";
 import { appWithTranslation, key, Namespace, useTranslation } from "@/shared/translation";
-import "@/shared/styles/globals.scss";
+import "@/shared/styles/global.scss";
 import { AppProps } from "./_app.types";
 import { queryClient } from "@/shared/api/hooks";
 import { startMirage } from "@/other/mirage/config";
@@ -75,6 +75,7 @@ function ThemeConfig(props: PropsWithChildren) {
                     titleMarginTop: 0,
                     margin: 0,
                     fontSizeHeading4: 18,
+                    fontSizeHeading3: 26,
                 },
                 Input: {
                     lineWidth: 2,

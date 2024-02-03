@@ -1,4 +1,4 @@
-import * as styles from "./index.module.scss";
+import styles from "./index.module.scss";
 import { Filters, Header } from "@/widgets";
 import { Gap } from "@/shared/ui/gap";
 import { EventList } from "@/widgets/eventList/eventList.component";
@@ -23,7 +23,7 @@ export function Index() {
                 <Gap size="m"/>
                 <Filters filters={filters["all"]} setFilters={filtersSetter("all")}/>
                 <Gap size="m"/>
-                <EventList link="#" title="На этой неделе" filters={filters["all"]}/>
+                <EventList link="#" title="Мероприятия" filters={filters["all"]}/>
             </main>
         </>
     );

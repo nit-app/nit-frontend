@@ -5,11 +5,10 @@ const instance = axios.create({
     withCredentials: true,
     headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Headers": "Content-Type"
     },
 });
 
-axios.interceptors.response.use(function (response) {
+instance.interceptors.response.use(function (response) {
     return response;
 }, function (error) {
     return Promise.reject(error);

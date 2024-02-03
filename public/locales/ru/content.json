@@ -1,5 +1,6 @@
 {
   "hello": "Привет, nIT!",
+  "wentWrong": "Что-то пошло не так",
   "enterCodeForm": {
     "labels": {
       "defaults": {

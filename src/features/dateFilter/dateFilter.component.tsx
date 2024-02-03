@@ -3,7 +3,7 @@ import { DatePicker } from "@/shared/ui/datePicker";
 import { Button } from "@/shared/ui/button";
 import { useState } from "react";
 import dayjs, { Dayjs } from "dayjs";
-import * as styles from "./dateFilter.module.scss";
+import styles from "./dateFilter.module.scss";
 import { Namespace, useTranslation } from "@/shared/translation";
 
 interface DateFilterProps {
@@ -29,7 +29,6 @@ export function DateFilter(props: DateFilterProps) {
     return (
         <div className={styles.datePickerContainer}>
             <DatePicker.RangePicker
-
                 value={[dayjs(props.from), dayjs(props.to)]}
                 open={isOpen}
                 onChange={onChange}

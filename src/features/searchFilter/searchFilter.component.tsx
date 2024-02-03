@@ -1,6 +1,6 @@
 import { Input } from "@/shared/ui/input";
 import { SearchOutlined } from "@ant-design/icons";
-import * as styles from "./searchFilter.module.scss";
+import styles from "./searchFilter.module.scss";
 import { Namespace, useTranslation } from "@/shared/translation";
 
 export function SearchFilter() {

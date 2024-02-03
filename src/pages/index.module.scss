@@ -1,8 +1,10 @@
 @use '@/shared/styles/variables' as v;
 
 .main {
+  $content-width-l: v.$content-width-l;
   max-width: v.$content-width-l;
   padding-top: v.$size-m;
   margin-left: auto;
   margin-right: auto;
+  width: min($content-width-l, 92vw);
 }

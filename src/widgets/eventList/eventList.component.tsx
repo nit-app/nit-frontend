@@ -1,12 +1,12 @@
-import * as styles from "./eventList.module.scss";
+import styles from "./eventList.module.scss";
 import { EventCard } from "@/entities";
 import { List } from "antd";
 import { useLookupEvents } from "@/shared/api/hooks";
 import { FiltersPayload } from "@/shared/api/queries/events/types";
 import { Typography } from "@/shared/ui/typography";
-import { Namespace, useTranslation } from "@/shared/translation";
+import { key, Namespace, useTranslation } from "@/shared/translation";
 
-const { Title, Link } = Typography;
+const { Title, Text } = Typography;
 
 interface EventListProps {
     title: string;
@@ -14,17 +14,18 @@ interface EventListProps {
     filters: FiltersPayload;
 }
 
-export function EventList({ title, filters, link }: EventListProps) {
-    const { t } = useTranslation(Namespace.content);
-    const { events, isEventsLoading } = useLookupEvents(filters);
+export function EventList({ title, filters }: EventListProps) {
+    const { events, isEventsLoading, isEventsError } = useLookupEvents(filters);
+
+    const { t } = useTranslation();
 
     return (
         <div className={styles.listContainer}>
             <div className={styles.headerContainer}>
-                <Title>{title}</Title>
-                <Link type="text" href={link} className={styles.seeAll}>{t("eventList:seeAll")}</Link>
+                <Title level={3}>{title}</Title>
             </div>
             <List loading={isEventsLoading}>
+                {isEventsError && <Text>{t(key(Namespace.content, "wentWrong"))}</Text>}
                 <div className={styles.eventContainer}>
                     {
                         !isEventsLoading && events.map((event) => <EventCard event={event} key={event.uuid}/>)

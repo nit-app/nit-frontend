@@ -13,7 +13,7 @@ export interface Event {
     modifiedAt: string;
     schedule: Schedule[];
     tags: string[];
-    description: string;
+    plainDescription: string;
 }
 
 
