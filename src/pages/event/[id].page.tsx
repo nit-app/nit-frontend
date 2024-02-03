@@ -9,6 +9,7 @@ import { useLookupEvent } from "@/shared/api/hooks";
 
 
 const { Title, Text } = Typography;
+
 export default function Event(props: { id: string }) {
     const { event, isEventLoading } = useLookupEvent(props.id);
     if (isEventLoading) return (

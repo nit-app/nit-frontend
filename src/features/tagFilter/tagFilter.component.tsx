@@ -1,13 +1,17 @@
 import { TagOutlined } from "@ant-design/icons";
-import { Button, Popover } from "@/shared/ui";
-import { Namespace, useTranslation } from "@/shared/translation";
-import { Tag } from "antd";
+import { Button, Input, Popover, Typography } from "@/shared/ui";
+import * as styles from "./tagFilter.module.scss";
+import { key, Namespace, useTranslation } from "@/shared/translation";
+import { Badge, Tag } from "antd";
 import { useEffect, useRef, useState } from "react";
+
+const { Text } = Typography;
 
 interface TagFilterProps {
     selected: string[];
     all: string[];
     onCheck: (tag: string) => void;
+    onSearch: (term: string) => void;
 }
 
 
@@ -34,39 +38,54 @@ export function TagFilter(props: TagFilterProps) {
 
     return (
         <Popover
-            content={<PopoverContent selected={props.selected} onCheck={props.onCheck} all={props.all} />}
-            title="Выберите теги"
+            content={<PopoverContent onSearch={props.onSearch} selected={props.selected} onCheck={props.onCheck}
+                                     all={props.all}/>}
             trigger="click"
+            placement="bottom"
+            arrow={false}
+            overlayClassName={styles.popoverContainer}
             open={open}
         >
-            <Button ref={popoverRef} onClick={() => setOpen(p => !p)}>{t("filters:tags")}<TagOutlined/></Button>
+            <Badge count={props.selected.length} showZero={false}>
+                <Button
+                    ref={popoverRef}
+                    onClick={() => setOpen(p => !p)}
+                >
+                    {t("filters:tags")}<TagOutlined/>
+                </Button>
+            </Badge>
         </Popover>
     );
 }
 
 interface PopoverContentProps {
-    selected: string[]
-    all: string[]
-    onCheck(tag: string): void
+    selected: string[];
+    all: string[];
+
+    onSearch(term: string): void;
+
+    onCheck(tag: string): void;
 }
 
 function PopoverContent(props: PopoverContentProps) {
+    const { t } = useTranslation();
     return (
-        <div style={{ maxWidth: "200px" }}>
-            <div style={{
-                display: "flex",
-                flexWrap: "wrap"
-            }}></div>
-            {
-                props.all.map(t => (
-                    <Tag.CheckableTag
-                        checked={props.selected.includes(t)}
-                        onClick={() => props.onCheck(t)}
-                        key={t}
-                    >{t.toUpperCase()}
-                    </Tag.CheckableTag>
-                ))
-            }
+        <div className={styles.popoverContent}>
+            <Input.Search onChange={(e) => props.onSearch(e.target.value)}
+                          placeholder={t(key(Namespace.content, "search"))}/>
+            <div className={styles.tagList}>
+                {
+                    props.all.map(t => (
+                        <Tag.CheckableTag
+                            checked={props.selected.includes(t)}
+                            onClick={() => props.onCheck(t)}
+                            key={t}
+                        >{t.toUpperCase()}
+                        </Tag.CheckableTag>
+                    ))
+                }
+                {props.all.length < 1 && <Text>{t(key(Namespace.content, "nothingFound"))}</Text>}
+            </div>
         </div>
     );
 }

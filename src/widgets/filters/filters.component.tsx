@@ -2,26 +2,34 @@ import styles from "./style.module.scss";
 import { DateFilter } from "@/features/dateFilter";
 import { TagFilter } from "@/features/tagFilter";
 import { FiltersPayload } from "@/shared/api/queries/events/types";
-import { SearchFilter } from "@/features/searchFilter";
+import { useState } from "react";
 
 
 interface FiltersProps {
     filters: FiltersPayload;
     setFilters: (filters: FiltersPayload) => void;
 }
+
 const tags = ["иб", "ит", "кии", "киберучения", "митап", "devops", "регуляторы", "воркшоп", "лекция"];
 
 export function Filters({ filters, setFilters }: FiltersProps) {
+    const [tagSearchTerm, setTagSearchTerm] = useState("");
+
     function onDateChange(from: string, to: string) {
         setFilters({ ...filters, from, to });
     }
 
     function onTagCheck(tag: string) {
-        if (filters.tags && filters.tags.includes(tag)) {
-            setFilters({ ...filters, tags: filters.tags.filter(t => t !== tag) });
-        } else {
-            setFilters({ ...filters, tags: [...(filters.tags ?? []), tag] });
+        const { tags, ...other } = filters;
+        console.log(other);
+        if (!tags)
+            return setFilters({ ...other, tags: [tag] });
+        if (tags.includes(tag)) {
+            if (tags.length > 1)
+                return setFilters({ ...other, tags: tags.filter(t => t !== tag) });
+            return setFilters({ ...other });
         }
+        return setFilters({ ...other, tags: [...(tags ?? []), tag] });
     }
 
     return (
@@ -31,7 +39,8 @@ export function Filters({ filters, setFilters }: FiltersProps) {
                     from={filters.from}
                     to={filters.to}
                     setRange={onDateChange}/>
-                <TagFilter onCheck={onTagCheck} selected={filters?.tags ?? []} all={tags}/>
+                <TagFilter onSearch={setTagSearchTerm} onCheck={onTagCheck} selected={filters?.tags ?? []}
+                           all={tags.filter(tag => tag.toLowerCase().includes(tagSearchTerm.toLowerCase()))}/>
             </div>
 
         </div>

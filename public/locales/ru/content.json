@@ -1,6 +1,8 @@
 {
   "hello": "Привет, nIT!",
   "wentWrong": "Что-то пошло не так",
+  "search": "поиск",
+  "nothingFound": "Ничего не найдено",
   "enterCodeForm": {
     "labels": {
       "defaults": {

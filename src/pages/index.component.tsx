@@ -24,12 +24,13 @@ export function Index() {
         }
     });
 
-    console.log(filters);
-
     function filtersSetter(name: string) {
         return (filters: FiltersPayload) => {
             const newParams = new URLSearchParams(params.toString());
-            if (filters.tags) newParams.set("tags", filters.tags.join(","));
+            if (filters.tags && filters.tags.filter(Boolean).length > 0)
+                newParams.set("tags", filters.tags.join(","));
+            else newParams.delete("tags");
+
             if (filters.from) newParams.set("from", filters.from);
             if (filters.to) newParams.set("to", filters.to);
 
