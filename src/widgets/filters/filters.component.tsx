@@ -21,7 +21,6 @@ export function Filters({ filters, setFilters }: FiltersProps) {
 
     function onTagCheck(tag: string) {
         const { tags, ...other } = filters;
-        console.log(other);
         if (!tags)
             return setFilters({ ...other, tags: [tag] });
         if (tags.includes(tag)) {

@@ -23,3 +23,10 @@
     margin: 0;
   }
 }
+
+.tagsContainer {
+  & > h4 {
+    margin-top: 0;
+    padding-bottom: v.$size-s;
+  }
+}

@@ -1,11 +1,11 @@
-import { TagOutlined } from "@ant-design/icons";
+import { SearchOutlined, TagOutlined } from "@ant-design/icons";
 import { Button, Input, Popover, Typography } from "@/shared/ui";
 import * as styles from "./tagFilter.module.scss";
 import { key, Namespace, useTranslation } from "@/shared/translation";
 import { Badge, Tag } from "antd";
 import { useEffect, useRef, useState } from "react";
 
-const { Text } = Typography;
+const { Text, Title } = Typography;
 
 interface TagFilterProps {
     selected: string[];
@@ -46,7 +46,7 @@ export function TagFilter(props: TagFilterProps) {
             overlayClassName={styles.popoverContainer}
             open={open}
         >
-            <Badge count={props.selected.length} showZero={false}>
+            <Badge count={props.selected.length} showZero={false} color="#1677ff">
                 <Button
                     ref={popoverRef}
                     onClick={() => setOpen(p => !p)}
@@ -71,21 +71,46 @@ function PopoverContent(props: PopoverContentProps) {
     const { t } = useTranslation();
     return (
         <div className={styles.popoverContent}>
-            <Input.Search onChange={(e) => props.onSearch(e.target.value)}
+            <Input suffix={<SearchOutlined />} bordered onChange={(e) => props.onSearch(e.target.value)}
                           placeholder={t(key(Namespace.content, "search"))}/>
-            <div className={styles.tagList}>
-                {
-                    props.all.map(t => (
-                        <Tag.CheckableTag
-                            checked={props.selected.includes(t)}
-                            onClick={() => props.onCheck(t)}
-                            key={t}
-                        >{t.toUpperCase()}
-                        </Tag.CheckableTag>
-                    ))
-                }
-                {props.all.length < 1 && <Text>{t(key(Namespace.content, "nothingFound"))}</Text>}
-            </div>
+            {props.selected?.length > 0 && (
+                <div className={styles.tagsContainer}>
+                    <Title level={4}>{t(key(Namespace.content, "selectedTags"))}</Title>
+                    <div className={styles.tagList}>
+                        {
+                            props.selected.map(t => (
+                                <Tag.CheckableTag
+                                    checked
+                                    onClick={() => props.onCheck(t)}
+                                    key={t}
+                                >{t.toUpperCase()}
+                                </Tag.CheckableTag>
+                            ))
+                        }
+                    </div>
+                </div>
+            )}
+            {
+                props.all?.length > 0 && (
+                    <div className={styles.tagsContainer}>
+                        <Title level={4}>{t(key(Namespace.content, "foundTags"))}</Title>
+                        <div className={styles.tagList}>
+                            {
+                                props.all.map(t => (
+                                    <Tag.CheckableTag
+                                        checked={props.selected.includes(t)}
+                                        onClick={() => props.onCheck(t)}
+                                        key={t}
+                                    >{t.toUpperCase()}
+                                    </Tag.CheckableTag>
+                                ))
+                            }
+                            {props.all.length < 1 && <Text>{t(key(Namespace.content, "nothingFound"))}</Text>}
+                        </div>
+                    </div>
+                )
+            }
+
         </div>
     );
 }
