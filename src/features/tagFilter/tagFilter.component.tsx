@@ -1,8 +1,8 @@
-import { SearchOutlined, TagOutlined } from "@ant-design/icons";
-import { Button, Input, Popover, Typography } from "@/shared/ui";
+import { LoadingOutlined, SearchOutlined, TagOutlined } from "@ant-design/icons";
+import { Button, Input, Loader, Popover, Typography } from "@/shared/ui";
 import * as styles from "./tagFilter.module.scss";
 import { key, Namespace, useTranslation } from "@/shared/translation";
-import { Badge, Tag } from "antd";
+import { Badge, Spin, Tag } from "antd";
 import { useEffect, useRef, useState } from "react";
 
 const { Text, Title } = Typography;
@@ -10,6 +10,7 @@ const { Text, Title } = Typography;
 interface TagFilterProps {
     selected: string[];
     all: string[];
+    searching: boolean;
     onCheck: (tag: string) => void;
     onSearch: (term: string) => void;
 }
@@ -38,8 +39,12 @@ export function TagFilter(props: TagFilterProps) {
 
     return (
         <Popover
-            content={<PopoverContent onSearch={props.onSearch} selected={props.selected} onCheck={props.onCheck}
-                                     all={props.all}/>}
+            content={<PopoverContent
+                onSearch={props.onSearch}
+                selected={props.selected}
+                searching={props.searching}
+                onCheck={props.onCheck}
+                all={props.all}/>}
             trigger="click"
             placement="bottom"
             arrow={false}
@@ -61,6 +66,7 @@ export function TagFilter(props: TagFilterProps) {
 interface PopoverContentProps {
     selected: string[];
     all: string[];
+    searching: boolean;
 
     onSearch(term: string): void;
 
@@ -71,8 +77,8 @@ function PopoverContent(props: PopoverContentProps) {
     const { t } = useTranslation();
     return (
         <div className={styles.popoverContent}>
-            <Input suffix={<SearchOutlined />} bordered onChange={(e) => props.onSearch(e.target.value)}
-                          placeholder={t(key(Namespace.content, "search"))}/>
+            <Input suffix={<SearchOutlined/>} bordered onChange={(e) => props.onSearch(e.target.value)}
+                   placeholder={t(key(Namespace.content, "search"))}/>
             {props.selected?.length > 0 && (
                 <div className={styles.tagsContainer}>
                     <Title level={4}>{t(key(Namespace.content, "selectedTags"))}</Title>
@@ -90,11 +96,12 @@ function PopoverContent(props: PopoverContentProps) {
                     </div>
                 </div>
             )}
-            {
-                props.all?.length > 0 && (
-                    <div className={styles.tagsContainer}>
-                        <Title level={4}>{t(key(Namespace.content, "foundTags"))}</Title>
-                        <div className={styles.tagList}>
+
+            <div className={styles.tagsContainer}>
+                <Title level={4}>{t(key(Namespace.content, "foundTags"))} {props.searching &&
+                    <Loader size="m"/>}</Title>
+                {
+                    props.all?.length > 0 && (<div className={styles.tagList}>
                             {
                                 props.all.map(t => (
                                     <Tag.CheckableTag
@@ -107,9 +114,10 @@ function PopoverContent(props: PopoverContentProps) {
                             }
                             {props.all.length < 1 && <Text>{t(key(Namespace.content, "nothingFound"))}</Text>}
                         </div>
-                    </div>
-                )
-            }
+                    )
+                }
+            </div>
+
 
         </div>
     );

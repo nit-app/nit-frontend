@@ -6,3 +6,4 @@ export * from "./input";
 export * from "./timer";
 export * from "./typography";
 export * from "./popover";
+export * from "./loader";

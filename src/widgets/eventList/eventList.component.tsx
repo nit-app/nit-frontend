@@ -5,6 +5,8 @@ import { useLookupEvents } from "@/shared/api/hooks";
 import { FiltersPayload } from "@/shared/api/queries/events/types";
 import { Typography } from "@/shared/ui/typography";
 import { key, Namespace, useTranslation } from "@/shared/translation";
+import { Loader } from "@/shared/ui";
+import { LoadingOutlined } from "@ant-design/icons";
 
 const { Title, Text } = Typography;
 
@@ -24,7 +26,7 @@ export function EventList({ title, filters }: EventListProps) {
             <div className={styles.headerContainer}>
                 <Title level={3}>{title}</Title>
             </div>
-            <List loading={isEventsLoading}>
+            <List loading={isEventsLoading ? { indicator: <LoadingOutlined/> } : false}>
                 {isEventsError && <Text>{t(key(Namespace.content, "wentWrong"))}</Text>}
                 <div className={styles.eventContainer}>
                     {

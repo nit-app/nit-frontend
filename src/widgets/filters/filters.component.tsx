@@ -3,6 +3,7 @@ import { DateFilter } from "@/features/dateFilter";
 import { TagFilter } from "@/features/tagFilter";
 import { FiltersPayload } from "@/shared/api/queries/events/types";
 import { useState } from "react";
+import { useSearchTags } from "@/shared/api/hooks";
 
 
 interface FiltersProps {
@@ -10,10 +11,11 @@ interface FiltersProps {
     setFilters: (filters: FiltersPayload) => void;
 }
 
-const tags = ["иб", "ит", "кии", "киберучения", "митап", "devops", "регуляторы", "воркшоп", "лекция"];
 
 export function Filters({ filters, setFilters }: FiltersProps) {
     const [tagSearchTerm, setTagSearchTerm] = useState("");
+
+    const { tags, isTagsLoading } = useSearchTags(tagSearchTerm);
 
     function onDateChange(from: string, to: string) {
         setFilters({ ...filters, from, to });
@@ -38,8 +40,12 @@ export function Filters({ filters, setFilters }: FiltersProps) {
                     from={filters.from}
                     to={filters.to}
                     setRange={onDateChange}/>
-                <TagFilter onSearch={setTagSearchTerm} onCheck={onTagCheck} selected={filters?.tags ?? []}
-                           all={tags.filter(tag => tag.toLowerCase().includes(tagSearchTerm.toLowerCase()))}/>
+                <TagFilter
+                    searching={isTagsLoading}
+                    onSearch={setTagSearchTerm}
+                    onCheck={onTagCheck}
+                    selected={filters?.tags ?? []}
+                    all={tags}/>
             </div>
 
         </div>
