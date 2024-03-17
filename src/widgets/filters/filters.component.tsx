@@ -17,7 +17,7 @@ export function Filters({ filters, setFilters }: FiltersProps) {
 
     const { tags, isTagsLoading } = useSearchTags(tagSearchTerm);
 
-    function onDateChange(from: string, to: string) {
+    function onDateChange(from: string | null, to: string | null) {
         setFilters({ ...filters, from, to });
     }
 

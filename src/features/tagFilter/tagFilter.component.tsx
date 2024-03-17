@@ -1,8 +1,8 @@
-import { LoadingOutlined, SearchOutlined, TagOutlined } from "@ant-design/icons";
+import { SearchOutlined, TagOutlined } from "@ant-design/icons";
 import { Button, Input, Loader, Popover, Typography } from "@/shared/ui";
 import * as styles from "./tagFilter.module.scss";
 import { key, Namespace, useTranslation } from "@/shared/translation";
-import { Badge, Spin, Tag } from "antd";
+import { Badge, Tag } from "antd";
 import { useEffect, useRef, useState } from "react";
 
 const { Text, Title } = Typography;

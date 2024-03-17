@@ -1,10 +1,10 @@
 import { ConfigProvider, DatePicker as AntdDatePicker } from "antd";
 import locale from "antd/locale/ru_RU";
-import { ForwardedRef, forwardRef } from "react";
+import { ComponentProps, ForwardedRef, forwardRef } from "react";
 
 export const RangePicker = forwardRef(RangePickerInner);
 
-export function RangePickerInner(props: typeof AntdDatePicker.RangePicker["propTypes"], ref: ForwardedRef<string>) {
+export function RangePickerInner(props: ComponentProps<typeof AntdDatePicker.RangePicker>, ref: ForwardedRef<unknown>) {
     return (
         <ConfigProvider
             theme={{
@@ -13,14 +13,13 @@ export function RangePickerInner(props: typeof AntdDatePicker.RangePicker["propT
                         cellActiveWithRangeBg: "#a2c9ff"
                     }
                 }
-            }}>
-            <AntdDatePicker.RangePicker
-                ref={ref}
-
-                locale={{
-                    ...locale.DatePicker,
+            }}
+            locale={{
+                ...locale,
+                Calendar: {
+                    ...locale.Calendar,
                     lang: {
-                        ...locale.DatePicker?.lang,
+                        ...locale.Calendar?.lang,
                         shortWeekDays: ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
                         shortMonths: [
                             "Янв",
@@ -36,10 +35,14 @@ export function RangePickerInner(props: typeof AntdDatePicker.RangePicker["propT
                             "Ноя",
                             "Дек"
                         ]
-                    },
-
-                }}
+                    }
+                }
+            }}
+        >
+            <AntdDatePicker.RangePicker
+                ref={ref as any}
                 {...props}
+                renderExtraFooter={() => <div>123</div>}
             />
         </ConfigProvider>
     );

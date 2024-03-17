@@ -1,6 +1,6 @@
 import { CalendarOutlined } from "@ant-design/icons";
 import { DatePicker, Button } from "@/shared/ui";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import dayjs, { Dayjs } from "dayjs";
 import styles from "./dateFilter.module.scss";
 import { Namespace, useTranslation } from "@/shared/translation";
@@ -8,7 +8,7 @@ import { Namespace, useTranslation } from "@/shared/translation";
 interface DateFilterProps {
     from: string;
     to: string;
-    setRange: (from: string, to: string) => void;
+    setRange: (from: string | null, to: string | null) => void;
 }
 
 export function DateFilter(props: DateFilterProps) {
@@ -22,9 +22,10 @@ export function DateFilter(props: DateFilterProps) {
         setIsOpen(s => !s);
     }
 
-    function onChange(dates: [Dayjs, Dayjs]) {
+    function onChange(dates: [Dayjs | null, Dayjs | null] | null) {
+        if (!dates || !dates[0] || !dates[1]) return props.setRange(null, null);
         const [from, to] = dates;
-        props.setRange(from.toISOString(), to.toISOString());
+        props.setRange(from?.toISOString() ?? null, to?.toISOString() ?? null);
     }
 
     useEffect(() => {

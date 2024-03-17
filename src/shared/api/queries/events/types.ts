@@ -44,8 +44,8 @@ export interface EventRequest extends Omit<Event, "id"> {
  */
 
 export interface FiltersPayload {
-    from: string;
-    to: string;
+    from: string | null;
+    to: string | null;
     tags?: string[];
     excludeAgeRestricted?: boolean;
     excludePaid?: boolean;
