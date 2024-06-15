@@ -1,0 +1,57 @@
+@use '@/shared/styles/variables' as v;
+
+.draftPreviewContainer {
+  position: relative;
+  width: 100%;
+  border: 2px solid v.$color-primary-bg;
+  padding: v.$size-s;
+  border-radius: v.$size-s;
+  box-sizing: border-box;
+}
+
+.draftHeaderContainer {
+  display: flex;
+  flex-direction: column;
+  gap: v.$size-s;
+
+  & > h4 {
+    margin: 0;
+  }
+}
+
+.draftDateAndLocationContainer {
+  display: flex;
+  flex-direction: column;
+  gap: v.$size-xs;
+
+  .eventDateRow {
+
+  }
+
+  .eventLocationRow {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
+
+.draftDescriptionContainer {
+  align-self: stretch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  white-space: nowrap;
+}
+
+.row {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+
+  & > * {
+    flex-basis: 100%;
+  }
+}
