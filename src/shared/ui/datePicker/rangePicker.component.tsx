@@ -42,7 +42,6 @@ export function RangePickerInner(props: ComponentProps<typeof AntdDatePicker.Ran
             <AntdDatePicker.RangePicker
                 ref={ref as any}
                 {...props}
-                renderExtraFooter={() => <div>123</div>}
             />
         </ConfigProvider>
     );

@@ -5,6 +5,7 @@ import { AxiosResponse } from "axios";
 
 // from this moment to the biggest date
 export const defaultFilters = () => ({
+    tags: [],
     from: (new Date()).toISOString(),
     // 40 days
     to: (new Date(Number(new Date()) + 1000 * 60 * 60 * 24 * 40)).toISOString() });

@@ -22,7 +22,7 @@ export function EventCard({ event }: EventCardProps) {
                     </div>
                     <div className={styles.eventDateAndLocationContainer}>
                         <div className={styles.eventDateRow}>
-                            <Text>{new Date(event.schedule[0].beginsAt).toLocaleString("ru", {
+                            <Text>{new Date(event.schedule?.[0]?.beginsAt).toLocaleString("ru", {
                                 day: "numeric",
                                 year: "numeric",
                                 month: "long"
@@ -33,7 +33,7 @@ export function EventCard({ event }: EventCardProps) {
                         </div>
                     </div>
                     <Typography.Link className={styles.eventFavCountRow}>
-                        <UserOutlined/>{event.favCount}
+                        <><UserOutlined/>{event.favCount}</>
                     </Typography.Link>
                 </div>
                 <div className={styles.eventDescriptionContainer}>

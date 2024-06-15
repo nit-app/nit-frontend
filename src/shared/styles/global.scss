@@ -18,6 +18,13 @@ body {
     scrollbar-width: none;
 }
 
+.ant-picker-range-arrow.ant-picker-range-arrow {
+    visibility: hidden;
+}
+
+.ant-picker-panel-container.ant-picker-panel-container.ant-picker-panel-container {
+    box-shadow: none;
+}
 @media screen and (max-width: 760px) {
     .ant-picker-panels {
         display: inline-flex;

@@ -26,7 +26,7 @@ export function Header() {
                 )}
                 {auth && !isUserLoading && (
                     <>
-                        <Button onClick={mutateAsync} ghost type="primary">Выйти</Button>
+                        <Button onClick={() => mutateAsync()} ghost type="primary">Выйти</Button>
                     </>
                 )}
 

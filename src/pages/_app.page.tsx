@@ -8,14 +8,7 @@ import { appWithTranslation, key, Namespace, useTranslation } from "@/shared/tra
 import "@/shared/styles/global.scss";
 import { AppProps } from "./_app.types";
 import { queryClient } from "@/shared/api/hooks";
-import { startMirage } from "@/other/mirage/config";
 import { ConfigProvider } from "antd";
-
-
-if (process.env.NEXT_PUBLIC_MODE === "debug") {
-    console.log("------ DEBUG MODE ------");
-    startMirage();
-}
 
 function App({ Component, ...props }: NextAppProps<AppProps>) {
     const { pageProps } = props;

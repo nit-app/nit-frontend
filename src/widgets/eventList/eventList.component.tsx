@@ -5,7 +5,6 @@ import { useLookupEvents } from "@/shared/api/hooks";
 import { FiltersPayload } from "@/shared/api/queries/events/types";
 import { Typography } from "@/shared/ui/typography";
 import { key, Namespace, useTranslation } from "@/shared/translation";
-import { Loader } from "@/shared/ui";
 import { LoadingOutlined } from "@ant-design/icons";
 
 const { Title, Text } = Typography;

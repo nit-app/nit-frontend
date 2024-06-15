@@ -21,12 +21,12 @@ export function TagFilter(props: TagFilterProps) {
     const { t } = useTranslation(Namespace.content);
 
     useEffect(() => {
-        function listener(event) {
+        function listener(event: MouseEvent) {
             const popoverElement = document.getElementsByClassName("ant-popover")?.[0];
             if (popoverRef.current && popoverElement && event.target) {
                 if (
-                    !popoverElement.contains(event.target) &&
-                    !popoverRef.current.contains(event.target)
+                    !popoverElement.contains(event.target as Node) &&
+                    !popoverRef.current.contains(event.target as Node)
                 ) setOpen(false);
             }
         }
@@ -35,7 +35,7 @@ export function TagFilter(props: TagFilterProps) {
         return () => document.removeEventListener("click", listener);
     }, []);
 
-    const popoverRef = useRef(null);
+    const popoverRef = useRef<HTMLElement | null>(null);
 
     return (
         <Popover

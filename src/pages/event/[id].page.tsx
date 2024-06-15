@@ -12,7 +12,7 @@ const { Title, Text } = Typography;
 
 export default function Event(props: { id: string }) {
     const { event, isEventLoading } = useLookupEvent(props.id);
-    if (isEventLoading) return (
+    if (isEventLoading || !event) return (
         <main className={styles.main}>
             <Header/>
             <Gap size="m"/>
@@ -84,8 +84,8 @@ export default function Event(props: { id: string }) {
     );
 }
 
-export const getServerSideProps = async ({ locale, ...context }: GetServerSidePropsContext<{ locale: string }>) => {
-    const { i18nSSRConfig } = await ssrTranslation(locale);
+export const getServerSideProps = async ({ locale, ...context }: GetServerSidePropsContext<{ locale: string, id: string }>) => {
+    const { i18nSSRConfig } = await ssrTranslation(locale ?? "");
     const uuid = context.params?.id || "";
     return {
         props: {
