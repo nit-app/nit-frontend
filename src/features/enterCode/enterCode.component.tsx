@@ -64,7 +64,7 @@ export const EnterCodeBasicComponent = ({ onSubmit, path, loading = false }: Ent
                     rules={[{ required: true, message: "" }, () => ({
                         validator(_, value) {
                             if (value.length === 4) {
-                                onSubmitInner(value)
+                                return onSubmitInner(value)
                                     .then(() => Promise.resolve())
                                     .catch(Promise.reject);
                             }

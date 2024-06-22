@@ -1,9 +1,10 @@
 import { ConfigProvider, Typography as AntdTypography } from "antd";
+import { ComponentProps, PropsWithChildren } from "react";
 
 const { Link: AntdLink } = AntdTypography;
 
-type LinkProps = Omit<typeof AntdLink["propTypes"], "type"> & {
-    type?: typeof AntdLink["propTypes"]["type"] | "text";
+type LinkProps = PropsWithChildren & Omit<ComponentProps<typeof AntdLink>, "type"> & {
+    type?: ComponentProps<typeof AntdLink>["type"] | "text";
 }
 
 const themes = {
@@ -28,6 +29,6 @@ export function Link(props: LinkProps) {
                 </ConfigProvider>
             );
         default:
-            return <AntdLink {...props}></AntdLink>;
+            return <AntdLink {...other}></AntdLink>;
     }
 }

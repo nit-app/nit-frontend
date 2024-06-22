@@ -13,11 +13,11 @@ export interface Event {
     modifiedAt: string;
     schedule: Schedule[];
     tags: string[];
-    description: string;
+    plainDescription: string;
 }
 
 
-interface Schedule {
+export interface Schedule {
     scheduleUUID: string;
     beginsAt: string;
     endsAt: string;
@@ -44,8 +44,8 @@ export interface EventRequest extends Omit<Event, "id"> {
  */
 
 export interface FiltersPayload {
-    from: string;
-    to: string;
+    from: string | null;
+    to: string | null;
     tags?: string[];
     excludeAgeRestricted?: boolean;
     excludePaid?: boolean;

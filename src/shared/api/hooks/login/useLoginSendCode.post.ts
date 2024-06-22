@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 
-import { loginSendCode } from "@/shared/api/queries/login";
+import { loginSendCode } from "@/shared/api/queries";
 
 
 export function useLoginSendCode() {

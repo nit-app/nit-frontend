@@ -1,8 +1,9 @@
-import * as styles from "./style.module.scss";
+import styles from "./style.module.scss";
 import { DateFilter } from "@/features/dateFilter";
 import { TagFilter } from "@/features/tagFilter";
 import { FiltersPayload } from "@/shared/api/queries/events/types";
-import { SearchFilter } from "@/features/searchFilter";
+import { useState } from "react";
+import { useSearchTags } from "@/shared/api/hooks";
 
 
 interface FiltersProps {
@@ -10,9 +11,26 @@ interface FiltersProps {
     setFilters: (filters: FiltersPayload) => void;
 }
 
+
 export function Filters({ filters, setFilters }: FiltersProps) {
-    function onDateChange(from: string, to: string) {
+    const [tagSearchTerm, setTagSearchTerm] = useState("");
+
+    const { tags, isTagsLoading } = useSearchTags(tagSearchTerm);
+
+    function onDateChange(from: string | null, to: string | null) {
         setFilters({ ...filters, from, to });
+    }
+
+    function onTagCheck(tag: string) {
+        const { tags, ...other } = filters;
+        if (!tags)
+            return setFilters({ ...other, tags: [tag] });
+        if (tags.includes(tag)) {
+            if (tags.length > 1)
+                return setFilters({ ...other, tags: tags.filter(t => t !== tag) });
+            return setFilters({ ...other });
+        }
+        return setFilters({ ...other, tags: [...(tags ?? []), tag] });
     }
 
     return (
@@ -22,11 +40,14 @@ export function Filters({ filters, setFilters }: FiltersProps) {
                     from={filters.from}
                     to={filters.to}
                     setRange={onDateChange}/>
-                <TagFilter/>
+                <TagFilter
+                    searching={isTagsLoading}
+                    onSearch={setTagSearchTerm}
+                    onCheck={onTagCheck}
+                    selected={filters?.tags ?? []}
+                    all={tags}/>
             </div>
-            <div>
-                <SearchFilter/>
-            </div>
+
         </div>
     );
 }

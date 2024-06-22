@@ -1,6 +1,7 @@
 @use '@/shared/styles/variables' as v;
 
 .eventCard {
+  position: relative;
   $gap-size: (1 * (v.$size-l));
   $content-width-l: v.$content-width-l;
   display: flex;
@@ -14,11 +15,41 @@
   border-radius: v.$size-s;
   box-sizing: border-box;
 }
+@media screen and (max-width: 1px) {
+  .eventCard {
+    $content-width-l: v.$content-width-l;
+    $gap-size: (1 * (v.$size-l));
+
+    width: calc((min($content-width-l, 60vw) - $gap-size));
+    height: calc((min($content-width-l, 60vw) - $gap-size));
+  }
+}
+@media screen and (max-width: 600px) {
+  .eventCard {
+    $content-width-l: v.$content-width-l;
+    $gap-size: (1 * (v.$size-l));
+
+    width: calc((min($content-width-l, 94vw) - $gap-size));
+    height: calc((min($content-width-l, 94vw) - $gap-size));
+  }
+}
+
 
 .eventHeaderContainer {
   display: flex;
   flex-direction: column;
   gap: v.$size-s;
+}
+
+.eventLink {
+  position: absolute;
+  color: transparent;
+  background-color: transparent;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .eventCardHeaderRow {
@@ -61,11 +92,18 @@
 }
 
 .eventFavCountRow {
-  margin-bottom: v.$size-m;
   width: max-content;
   display: flex;
   align-items: center;
   gap: v.$size-xxs;
+}
+
+.eventLikesRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: v.$size-s;
+  margin-bottom: v.$size-m;
 }
 
 .eventDescriptionContainer {

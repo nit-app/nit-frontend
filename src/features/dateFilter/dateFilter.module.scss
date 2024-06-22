@@ -3,14 +3,25 @@
 }
 
 .ghostDatePicker {
-  tab-index: 0;
-  background-color: black;
-  position: absolute !important;
-  width: 1px !important;
-  height: 1px !important;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
+  & input {
+    text-align: center;
+  }
+}
+
+.datePickerPopoverContent {
+  width: 700px;
+  height: 410px;
+}
+
+.datePickerContainer .ant-picker {
+  width: 100%;
+}
+
+@media screen and (max-width: 760px) {
+  .datePickerPopoverContent {
+    max-width: 100vw !important;
+    width: 350px;
+    height: 770px;
+  }
 }

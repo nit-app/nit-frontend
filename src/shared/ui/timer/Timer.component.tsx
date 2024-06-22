@@ -21,7 +21,6 @@ export const Timer = ({ setTimeIsUp, setCurrentCount }: TimerComponentProps) => 
         return () => {
             clearInterval(interval);
         };
-
     }, [time, isCounting]);
 
 

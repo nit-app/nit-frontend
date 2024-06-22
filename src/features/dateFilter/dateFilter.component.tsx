@@ -1,15 +1,14 @@
 import { CalendarOutlined } from "@ant-design/icons";
-import { DatePicker } from "@/shared/ui/datePicker";
-import { Button } from "@/shared/ui/button";
-import { useState } from "react";
+import { DatePicker, Button, Popover } from "@/shared/ui";
+import React, { useEffect, useRef, useState } from "react";
 import dayjs, { Dayjs } from "dayjs";
-import * as styles from "./dateFilter.module.scss";
+import styles from "./dateFilter.module.scss";
 import { Namespace, useTranslation } from "@/shared/translation";
 
 interface DateFilterProps {
-    from: string;
-    to: string;
-    setRange: (from: string, to: string) => void;
+    from: string | null;
+    to: string | null;
+    setRange: (from: string | null, to: string | null) => void;
 }
 
 export function DateFilter(props: DateFilterProps) {
@@ -17,24 +16,54 @@ export function DateFilter(props: DateFilterProps) {
 
     const { t } = useTranslation(Namespace.content);
 
-    function onClick() {
-        setIsOpen(s => !s);
+    const datePickerRef = useRef<HTMLDivElement | null>(null);
+
+    function onChange(dates: [Dayjs | null, Dayjs | null] | null) {
+        if (!dates || !dates[0] || !dates[1]) return props.setRange(null, null);
+        const [from, to] = dates;
+        props.setRange(from?.toISOString() ?? null, to?.toISOString() ?? null);
+        setIsOpen(false);
     }
 
-    function onChange(dates: [Dayjs, Dayjs]) {
-        const [from, to] = dates;
-        props.setRange(from.toISOString(), to.toISOString());
-    }
+    useEffect(() => {
+        function listener(event: MouseEvent) {
+            const datePickerElement = document.getElementsByClassName("ant-picker-dropdown")?.[0];
+            if (datePickerRef.current && datePickerElement && event.target) {
+                if (
+                    !datePickerElement.contains(event.target as Node) &&
+                    !datePickerRef.current.contains(event.target as Node)
+                ) setIsOpen(false);
+            }
+        }
+
+        document.addEventListener("click", listener);
+        return () => document.removeEventListener("click", listener);
+    }, []);
 
     return (
-        <div className={styles.datePickerContainer}>
-            <DatePicker.RangePicker
-
-                value={[dayjs(props.from), dayjs(props.to)]}
+        <div className={styles.datePickerContainer} ref={datePickerRef}>
+            <Popover
+                trigger='click'
+                onOpenChange={(v) => {
+                    setIsOpen(v);
+                }}
                 open={isOpen}
-                onChange={onChange}
-                className={styles.ghostDatePicker}/>
-            <Button onClick={onClick}>{t("filters:date")}<CalendarOutlined/></Button>
+                destroyTooltipOnHide
+                content={
+                    <div className={styles.datePickerPopoverContent}>
+                        <DatePicker.RangePicker
+                            value={[dayjs(props.from), dayjs(props.to)]}
+                            open
+                            variant='outlined'
+                            format='DD.MM.YYYY'
+                            onChange={onChange}
+                            className={styles.ghostDatePicker}
+                        />
+                    </div>
+                }>
+
+                <Button>{t("filters:date")}<CalendarOutlined/></Button>
+            </Popover>
         </div>
     );
 }

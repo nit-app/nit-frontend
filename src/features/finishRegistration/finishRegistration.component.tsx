@@ -1,7 +1,6 @@
 import React from "react";
 import { Logo } from "@/shared/elements/logo";
 import styles from "./style.module.scss";
-import { useRouter } from "next/router";
 import { Typography } from "@/shared/ui/typography";
 import { Form } from "@/shared/ui/form";
 import { Input } from "@/shared/ui/input";
@@ -16,14 +15,15 @@ type FinishRegistrationFieldType = {
     lastName: string;
 }
 export const FinishRegistrationComponent = () => {
-    const router = useRouter();
     const { t } = useTranslation(Namespace.content);
     const { registrationFinish, registrationFinishIsLoading } = useRegistrationFinish();
 
     const onFinish = (values: FinishRegistrationFieldType) => {
         if (registrationFinishIsLoading) return;
         registrationFinish(values)
-            .then(() => router.push("/"))
+            .then(() => {
+                window.location.href = "/";
+            })
             .catch(e => console.log(e)); //for testing in debug mode
     };
     return (

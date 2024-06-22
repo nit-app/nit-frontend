@@ -1,5 +1,10 @@
 {
   "hello": "Привет, nIT!",
+  "wentWrong": "Что-то пошло не так",
+  "search": "поиск",
+  "nothingFound": "Ничего не найдено",
+  "selectedTags": "Выбранные теги",
+  "foundTags": "Найденные теги",
   "enterCodeForm": {
     "labels": {
       "defaults": {

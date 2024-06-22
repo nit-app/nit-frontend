@@ -1,8 +1,9 @@
 import { ConfigProvider, Button as AntdButton } from "antd";
+import { ComponentProps } from "react";
 
 
-type ButtonProps = Omit<typeof AntdButton["propTypes"], "type"> & {
-    type: typeof AntdButton["propTypes"]["type"] | "text";
+type ButtonProps = Omit<ComponentProps<typeof AntdButton>, "type"> & {
+    type: ComponentProps<typeof AntdButton>["type"] | "text";
 }
 
 const themes = {
@@ -18,7 +19,7 @@ const themes = {
 export function Button(props: ButtonProps) {
     const { type, ...other } = props;
     switch (type) {
-        case "":
+        case "text":
             return (
                 <ConfigProvider
                     theme={themes[type]}

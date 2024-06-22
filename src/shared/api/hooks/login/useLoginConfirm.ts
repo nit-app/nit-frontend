@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 
-import { loginConfirm as loginConfirmQueryFn } from "@/shared/api/queries/login";
+import { loginConfirm as loginConfirmQueryFn } from "@/shared/api/queries";
 
 
 export function useLoginConfirm() {

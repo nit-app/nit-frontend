@@ -1,0 +1,32 @@
+@use '@/shared/styles/variables' as v;
+
+.popoverContainer {
+  $content-width-l: v.$content-width-l;
+  left: calc((100vw - min($content-width-l, 92vw)) / 2) !important;
+  width: 92vw;
+  max-width: 500px;
+}
+
+.popoverContent {
+  display: flex;
+  flex-direction: column;
+  gap: v.$size-m;
+}
+
+.tagList {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: v.$size-xxs;
+  justify-content: left;
+  & > span {
+    margin: 0;
+  }
+}
+
+.tagsContainer {
+  & > h4 {
+    margin-top: 0;
+    padding-bottom: v.$size-s;
+  }
+}
