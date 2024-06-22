@@ -1,49 +1,45 @@
 import styles from "./draft.module.scss";
-import { Spin } from "antd";
 
 import { Header } from "@/widgets";
 import { Gap } from "@/shared/ui";
 import { ssrTranslation } from "@/shared/translation/ssrTranslation";
 import { GetServerSidePropsContext } from "next";
-import { useLookupDrafts } from "@/shared/api/hooks/drafts/useDrafts.get";
-import { DraftCard, DraftPreview } from "@/entities";
+import { DraftPreview } from "@/entities";
 import { useState } from "react";
+import { Event, Schedule } from "@/shared/api/queries/events/types";
 import { Draft } from "@/shared/api/queries/drafts/types";
 import { useGetMe } from "@/shared/api/hooks";
 import { useRouter } from "next/router";
-import { usePublish } from "@/shared/api/hooks/event/publish.post";
+import { useCreate } from "@/shared/api/hooks/event/useCreateEvent";
+import { Dayjs } from "dayjs";
 
 
 export default function Drafts() {
-    const { drafts, isDraftsLoading } = useLookupDrafts();
-
-    const { publish } = usePublish();
     const { user, isUserLoading } = useGetMe();
+    const { create } = useCreate();
+
+    const createHandler = async (event: Event) => {
+        const e = { ...event };
+        e.schedule = [
+            {
+                beginsAt: (e.schedule[0] as unknown as Dayjs).toISOString(),
+                endsAt: (e.schedule[1] as unknown as Dayjs).toISOString()
+
+            }
+        ] as Schedule[];
+        create(e);
+    };
     const navigate = useRouter();
-    const [activeDraft, setActiveDraft] = useState<Draft | undefined>();
+    const [activeDraft] = useState<Partial<Draft>>({});
 
     if (!isUserLoading && !user?.isAdmin) navigate.push("/");
-    if (isDraftsLoading) return (
-        <main className={styles.main}>
-            <Header/>
-            <Gap size="m"/>
-            <Spin/>
-            <div style={{ paddingBottom: "40px" }}/>
-        </main>
-    );
 
     return (
         <main className={styles.main}>
             <Header/>
             <Gap size="m"/>
-            <div className={styles.mainContainer}>
-                <div className={styles.draftList}>
-                    {drafts.map(draft => <DraftCard key={draft.uuid} draft={draft}
-                                                    onClick={() => setActiveDraft(draft)}/>)}
-                </div>
-                <div className={styles.draftPreview}>
-                    <DraftPreview onSubmit={(f) => publish(f.uuid)} draft={activeDraft}/>
-                </div>
+            <div className={styles.draftPreview}>
+                <DraftPreview onSubmit={createHandler} draft={activeDraft}/>
             </div>
         </main>
     );
@@ -60,11 +56,11 @@ export const getServerSideProps = async ({ locale, ...context }: GetServerSidePr
             ...i18nSSRConfig,
             id: uuid,
             meta: {
-                title: "Черновики",
+                title: "Новое мероприятие",
                 tags: [
                     {
                         name: "title",
-                        content: "Черновики",
+                        content: "Новое мероприятие",
                         key: "title"
                     },
                 ]

@@ -6,10 +6,11 @@ import { Logo } from "@/shared/elements/logo";
 import { Button } from "@/shared/ui";
 import { useGetMe, useRevoke } from "@/shared/api/hooks";
 import { Namespace, useTranslation } from "@/shared/translation";
+import { HeartFilled, PlusOutlined } from "@ant-design/icons";
 
 
 export function Header() {
-    const { auth, isUserLoading } = useGetMe();
+    const { auth, isUserLoading, user } = useGetMe();
     const { mutateAsync } = useRevoke();
     const { t } = useTranslation(Namespace.content);
     return (
@@ -26,10 +27,16 @@ export function Header() {
                 )}
                 {auth && !isUserLoading && (
                     <>
+                        <Link href='/fav'><HeartFilled className={styles.favIcon}/></Link>
+                        {auth && user?.isAdmin && (
+                            <>
+                                <Button href='/drafts/new' ghost type='primary'><PlusOutlined/></Button>
+                            <Button href='/drafts' ghost type="primary">Черновики</Button>
+                            </>
+                        )}
                         <Button onClick={() => mutateAsync()} ghost type="primary">Выйти</Button>
                     </>
                 )}
-
             </div>
         </div>
     );

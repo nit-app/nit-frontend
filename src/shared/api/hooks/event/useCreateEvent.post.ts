@@ -4,7 +4,7 @@ import { lookupEvents, postCreateEvent } from "@/shared/api/queries";
 import { useQueriesInvalidator } from "@/shared/hooks";
 
 
-export function usePostCreateEvent() {
+export function useCreateEvent() {
     const { queryKey } = lookupEvents();
     const queriesInvalidator = useQueriesInvalidator(queryKey);
     const { mutateAsync, isLoading, isError } = useMutation(

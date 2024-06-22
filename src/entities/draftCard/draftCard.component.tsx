@@ -16,11 +16,11 @@ export function DraftCard({ draft, onClick }: DraftCardProps) {
                 <Title level={5}>{draft.title}</Title>
                 <div className={styles.draftDateAndLocationContainer}>
                     <div className={styles.draftDateRow}>
-                        <Text>{new Date(draft.schedule?.[0]?.beginsAt).toLocaleString("ru", {
+                        <Text>{draft?.schedule?.[0]?.beginsAt ? new Date(draft?.schedule?.[0]?.beginsAt).toLocaleString("ru", {
                             day: "numeric",
                             year: "numeric",
                             month: "long"
-                        })}</Text>
+                        }) : ""}</Text>
                     </div>
                 </div>
             </div>

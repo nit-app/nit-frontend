@@ -92,11 +92,18 @@
 }
 
 .eventFavCountRow {
-  margin-bottom: v.$size-m;
   width: max-content;
   display: flex;
   align-items: center;
   gap: v.$size-xxs;
+}
+
+.eventLikesRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: v.$size-s;
+  margin-bottom: v.$size-m;
 }
 
 .eventDescriptionContainer {

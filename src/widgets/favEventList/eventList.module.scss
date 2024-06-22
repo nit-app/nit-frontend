@@ -1,0 +1,21 @@
+@use '@/shared/styles/variables' as v;
+
+.eventContainer {
+  display: flex;
+  justify-content: flex-start;
+  gap: v.$size-l;
+  flex-wrap: wrap;
+}
+
+.listContainer {
+  display: flex;
+  flex-direction: column;
+  gap: v.$size-m;
+  padding-bottom: v.$size-m;
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}

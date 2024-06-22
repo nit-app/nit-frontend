@@ -1,18 +1,24 @@
 import * as styles from "./draftPreview.module.scss";
 import { Checkbox, InputNumber, Select } from "antd";
 import { Draft } from "@/shared/api/queries/drafts/types";
-import { Button, Form, Input } from "@/shared/ui";
+import { Button, DatePicker, Form, Input } from "@/shared/ui";
+import dayjs from "dayjs";
 
 interface DraftCardProps {
-    draft?: Draft;
-    onSubmit(draft: Draft): Promise<unknown>
+    draft?: Partial<Draft>;
+
+    onSubmit(draft: Draft): Promise<unknown>;
 }
 
 export function DraftPreview({ draft, onSubmit }: DraftCardProps) {
     const [form] = Form.useForm();
+    const schedule = draft?.schedule;
     return (
         <div className={styles.draftPreviewContainer}>
-            <Form form={form} onFinish={onSubmit} layout="vertical" fields={[
+            <Form form={form} onFinish={(event) => (onSubmit({ ...draft, ...event }))} layout="vertical" fields={[
+                {
+                    name: ["uuid"], value: draft?.uuid
+                },
                 {
                     name: ["title"], value: draft?.title
                 },
@@ -40,6 +46,10 @@ export function DraftPreview({ draft, onSubmit }: DraftCardProps) {
                 },
                 {
                     name: ["hasCertificate"], value: draft?.hasCertificate ?? false
+                },
+                {
+                    name: ["schedule"],
+                    value: (schedule && (schedule?.length ?? 0) > 0) ? [dayjs(schedule[0].beginsAt), dayjs(schedule[0].endsAt)] : [null, null]
                 }
             ]}>
                 <Form.Item name="title" label="Название">
@@ -48,34 +58,39 @@ export function DraftPreview({ draft, onSubmit }: DraftCardProps) {
                 <Form.Item name="ownerInfo" label="Источник">
                     <Input onChange={(event) => draft && (draft.ownerInfo = event.target.value)}/>
                 </Form.Item>
-                <Form.Item name="hasCertificate">
-                    <Checkbox onChange={(event) => draft && (draft.hasCertificate = event.target.value)}>
-                        С сертификатом
-                    </Checkbox>
-                </Form.Item>
-
+                <div className={styles.row}>
+                    <Form.Item name="hasCertificate">
+                        <Checkbox onChange={(event) => draft && (draft.hasCertificate = event.target.value)}>
+                            С сертификатом
+                        </Checkbox>
+                    </Form.Item>
+                    <Form.Item name="schedule" label="Дата">
+                        <DatePicker.RangePicker showTime/>
+                    </Form.Item>
+                </div>
                 <Form.Item name="location" label="Место проведения">
                     <Input onChange={(event) => draft && (draft.location = event.target.value)}/>
                 </Form.Item>
+
                 <div className={styles.row}>
                     <Form.Item name="priceLow" label="Минимальная цена">
                         <InputNumber style={{ width: "100%" }}
-                                     onChange={(event) => draft && (draft.priceLow = event.target.value)}/>
+                                     onChange={(value) => draft && (draft.priceLow = Number(value) || 0)}/>
                     </Form.Item>
                     <Form.Item name="priceHigh" label="Максимальная цена">
                         <InputNumber style={{ width: "100%" }}
-                                     onChange={(event) => draft && (draft.priceHigh = event.target.value)}/>
+                                     onChange={(value) => draft && (draft.priceHigh = Number(value) || 0)}/>
                     </Form.Item>
                 </div>
 
                 <div className={styles.row}>
                     <Form.Item name="ageLimitLow" label="Минимальный возраст">
                         <InputNumber style={{ width: "100%" }}
-                                     onChange={(event) => draft && (draft.ageLimitLow = event.target.value)}/>
+                                     onChange={(value) => draft && (draft.ageLimitLow = Number(value) || 0)}/>
                     </Form.Item>
                     <Form.Item name="ageLimitHigh" label="Максимальный возраст">
                         <InputNumber style={{ width: "100%" }}
-                                     onChange={(event) => draft && (draft.ageLimitHigh = event.target.value)}/>
+                                     onChange={(value) => draft && (draft.ageLimitHigh = Number(value) || 0)}/>
                     </Form.Item>
                 </div>
 
@@ -92,7 +107,7 @@ export function DraftPreview({ draft, onSubmit }: DraftCardProps) {
                         open={false}
                     />
                 </Form.Item>
-                <Button htmlType='submit'>Опубликовать</Button>
+                <Button htmlType="submit">Опубликовать</Button>
             </Form>
         </div>
     );

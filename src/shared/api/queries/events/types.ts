@@ -17,7 +17,7 @@ export interface Event {
 }
 
 
-interface Schedule {
+export interface Schedule {
     scheduleUUID: string;
     beginsAt: string;
     endsAt: string;

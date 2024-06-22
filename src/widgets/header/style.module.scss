@@ -28,4 +28,13 @@
   align-items: center;
   display: flex;
   gap: v.$size-s;
+  & .favIcon > svg {
+  }
+}
+
+.favIcon {
+  & > svg {
+    fill: red;
+    font-size: 24px;
+  }
 }
