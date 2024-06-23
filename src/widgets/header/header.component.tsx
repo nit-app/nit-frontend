@@ -7,11 +7,13 @@ import { Button } from "@/shared/ui";
 import { useGetMe, useRevoke } from "@/shared/api/hooks";
 import { Namespace, useTranslation } from "@/shared/translation";
 import { HeartFilled, PlusOutlined } from "@ant-design/icons";
+import { useRouter } from "next/router";
 
 
 export function Header() {
     const { auth, isUserLoading, user } = useGetMe();
     const { mutateAsync } = useRevoke();
+    const navigate = useRouter();
     const { t } = useTranslation(Namespace.content);
     return (
         <div className={styles.header}>
@@ -34,7 +36,7 @@ export function Header() {
                             <Button href='/drafts' ghost type="primary">Черновики</Button>
                             </>
                         )}
-                        <Button onClick={() => mutateAsync()} ghost type="primary">Выйти</Button>
+                        <Button onClick={() => mutateAsync().then(() => navigate.push("/login"))} ghost type="primary">Выйти</Button>
                     </>
                 )}
             </div>

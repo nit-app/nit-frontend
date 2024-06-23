@@ -9,6 +9,7 @@ import { useLookupEvent } from "@/shared/api/hooks";
 import { useLookupFavs } from "@/shared/api/hooks/event/useFav.get";
 import { useToggleFav } from "@/shared/api/hooks/event/useFav.post";
 import { HeartFilled, HeartOutlined, LoadingOutlined } from "@ant-design/icons";
+import { Link } from "@/shared/ui/typography/link";
 
 
 const { Title, Text } = Typography;
@@ -55,7 +56,7 @@ export default function Event(props: { id: string }) {
                             zIndex: 100,
                             color: "red",
                             marginRight: "5px"
-                        }}  onClick={toggleFavHandler}/>
+                        }} onClick={toggleFavHandler}/>
                         {event.title}
                     </Title>
                     <div style={{ paddingTop: "48px", height: "max-content" }}>
@@ -106,6 +107,10 @@ export default function Event(props: { id: string }) {
                     </div>;
                 })}
             </div>
+            {event.ownerInfo && <div>
+                <Text>Источник: <Link>{event.ownerInfo}</Link></Text>
+            </div>
+            }
             <div style={{ paddingBottom: "40px" }}/>
         </main>
     );

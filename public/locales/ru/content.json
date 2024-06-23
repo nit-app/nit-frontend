@@ -60,7 +60,7 @@
       "defaults": {
         "enter": "Войти",
         "firstTime": "Впервые тут? ",
-        "loginAccount": "Вход в акаунт",
+        "loginAccount": "Вход в аккаунт",
         "weSendCode": "Мы отправим код подтверждения",
         "further": "Далее",
         "createAccount": "Создать аккаунт"
